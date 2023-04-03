@@ -2,40 +2,22 @@ import './videosection.css'
 import VideoCard from '../VideoCard/VideoCard';
 import { useState, useEffect } from 'react';
 
+import { fetchFromApi } from '../utils/fetchFromAPI';
+
 const Videosection = ({fullSidebar}) => {
 
   const [popularVideosData, setPopularVideosData] = useState([]);
 
   const [channelData, setChannelData] = useState({});
 
-  const apiKey = process.env.REACT_APP_YOUTUBE_API;
-
-
-
-  
-
-  
 
   useEffect(()=>{
-    async function getData(){
 
-      const options = {
-        method: 'GET',
-        headers: {
-          'X-RapidAPI-Key': '81d0a0f8d4mshf9fd9ba2956eeabp1820a4jsnfc7929700ec8',
-          'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
-        }
-      };
-      
-      fetch('https://youtube138.p.rapidapi.com/channel/videos/?id=UCqrILQNl5Ed9Dz6CGMyvMTQ&hl=en&gl=US', options)
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-        setPopularVideosData(response.contents);
-      })
-      .catch(err => console.error(err));
-    }
-
+    fetchFromApi(`search/clever programmer`)
+    .then((data) => {
+      setPopularVideosData(data.items);
+    })
+    
     async function getChannelDetails(){
       const options = {
         method: 'GET',
@@ -55,7 +37,6 @@ const Videosection = ({fullSidebar}) => {
     }
 
     getChannelDetails();
-    getData();
   }, []);
 
   
