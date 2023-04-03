@@ -19,9 +19,8 @@ import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
 
-const Sidebar = () => {
+const Sidebar = ({fullSidebar}) => {
 
-    const fullSidebar = true;
   
   return (
     <div>

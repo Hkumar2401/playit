@@ -8,7 +8,7 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 
-const Navbar = () => {
+const Navbar = ({fullSidebar, setFullSidebar}) => {
 
   const hamburgerButton = useRef();
   const searchIconOnFocus = useRef();
@@ -18,11 +18,19 @@ const Navbar = () => {
   const hoverTitleNotifications = useRef();
 
   
+  const handleClick = () =>{
+    if(fullSidebar==true){
+      setFullSidebar(false);
+    } else{
+      setFullSidebar(true);
+    }
+  }
+  
   return (
     <div className="navbar flex justify-between items-center pl-2 pr-2">
         <div className="logo-section flex items-center">
           <div className="hamburger-icon-section">
-            <button ref={hamburgerButton} className='hamburger-icon'>
+            <button ref={hamburgerButton} onClick={handleClick} className='hamburger-icon'>
                 <div className="hamburger-icon-lines"></div>
                 <div className="hamburger-icon-lines"></div>
                 <div className="hamburger-icon-lines"></div>

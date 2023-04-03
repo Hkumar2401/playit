@@ -2,21 +2,59 @@ import './videosection.css'
 import VideoCard from '../VideoCard/VideoCard';
 import { useState, useEffect } from 'react';
 
-const Videosection = () => {
+const Videosection = ({fullSidebar}) => {
 
   const [popularVideosData, setPopularVideosData] = useState([]);
 
-  const fullSidebar = true;
+  const [channelData, setChannelData] = useState({});
 
   const apiKey = process.env.REACT_APP_YOUTUBE_API;
 
+
+
+  
+
+  
+
   useEffect(()=>{
     async function getData(){
-      const res = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&key=${apiKey}&maxResults=50`);
-      const data = await res.json();
-      console.log(data);
-      setPopularVideosData(data.items);
+
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': '81d0a0f8d4mshf9fd9ba2956eeabp1820a4jsnfc7929700ec8',
+          'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
+        }
+      };
+      
+      fetch('https://youtube138.p.rapidapi.com/channel/videos/?id=UCqrILQNl5Ed9Dz6CGMyvMTQ&hl=en&gl=US', options)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        setPopularVideosData(response.contents);
+      })
+      .catch(err => console.error(err));
     }
+
+    async function getChannelDetails(){
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': '81d0a0f8d4mshf9fd9ba2956eeabp1820a4jsnfc7929700ec8',
+          'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
+        }
+      };
+      
+      fetch('https://youtube138.p.rapidapi.com/channel/details/?id=UCqrILQNl5Ed9Dz6CGMyvMTQ&hl=en&gl=US', options)
+        .then(response => response.json())
+        .then(response => {
+          console.log(response);
+          setChannelData(response);
+        })
+        .catch(err => console.error(err));
+    }
+
+    getChannelDetails();
     getData();
   }, []);
 
@@ -28,14 +66,16 @@ const Videosection = () => {
         return (
           <VideoCard
           key={i} 
-          channelId={item.snippet.channelId}
-          videoId={item.id}
-          channelTitle={item.snippet.channelTitle}
-          videoTitle={item.snippet.title}
-          viewCount={item.statistics.viewCount}
-          thumbnail={item.snippet.thumbnails.high.url}
-          duration={item.contentDetails.duration}
-          publishedAt={item.snippet.publishedAt}
+          channelId={channelData.channelId}
+          channelIcon={channelData.avatar[2].url}
+          videoId={item.video.videoId}
+          channelTitle={channelData.title}
+          videoTitle={item.video.title}
+          viewCount={item.video.stats.views}
+          thumbnail={item.video.thumbnails[3].url} 
+          duration={item.video.lengthSeconds}
+          publishedAt={item.video.publishedTimeText}
+          fullSidebar={fullSidebar}
 
           />
         );
