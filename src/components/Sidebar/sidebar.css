@@ -1,0 +1,32 @@
+.sidebar{
+    flex: 0.12;
+    position: sticky;
+    top: 60px;
+}
+
+.sidebar-not-full{
+    position: sticky;
+    top: 60px;
+}
+
+.sidebar-buttons{
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.sidebar-buttons:hover{
+    background-color: rgb(243,243,242);
+}
+
+.sidebar-not-full-buttons{
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.sidebar-not-full-buttons:hover{
+    background-color: rgb(243,243,242);
+}
+
+.small-text{
+    font-size: 11px;
+}
