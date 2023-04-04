@@ -1,42 +1,47 @@
 import './videosection.css'
 import VideoCard from '../VideoCard/VideoCard';
 import { useState, useEffect } from 'react';
+import ChannelCard from '../ChannelCard/ChannelCard';
+import PlaylistCard from '../PlaylistCard/PlaylistCard';
 
-import { fetchFromApi } from '../utils/fetchFromAPI';
 
 const Videosection = ({fullSidebar}) => {
 
   const [popularVideosData, setPopularVideosData] = useState([]);
 
-  const [channelData, setChannelData] = useState({});
+  const [url, setUrl] = useState('search/?q=cleverprogrammer');
 
+const BASE_URL = 'https://youtube138.p.rapidapi.com';
+
+  
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
+      'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
+    }
+  };
 
   useEffect(()=>{
 
-    fetchFromApi(`search/clever programmer`)
-    .then((data) => {
-      setPopularVideosData(data.items);
-    })
-    
-    async function getChannelDetails(){
-      const options = {
-        method: 'GET',
-        headers: {
-          'X-RapidAPI-Key': '81d0a0f8d4mshf9fd9ba2956eeabp1820a4jsnfc7929700ec8',
-          'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
-        }
-      };
-      
-      fetch('https://youtube138.p.rapidapi.com/channel/details/?id=UCqrILQNl5Ed9Dz6CGMyvMTQ&hl=en&gl=US', options)
-        .then(response => response.json())
-        .then(response => {
-          console.log(response);
-          setChannelData(response);
-        })
-        .catch(err => console.error(err));
+    const fetchFromApi = async () =>{
+
+
+      await fetch(`${BASE_URL}/${url}`, options)
+          .then(async(response) =>  {
+            return await response.json();
+          })
+          .then(response => {
+            console.log(response.contents);
+            setPopularVideosData(response.contents);
+          })
+          .catch(err => console.error(err));
+  
+          
     }
 
-    getChannelDetails();
+    fetchFromApi();
+    
   }, []);
 
   
@@ -45,15 +50,16 @@ const Videosection = ({fullSidebar}) => {
     {
       popularVideosData.map((item, i)=>{
         return (
+          item.type==="video" &&
           <VideoCard
           key={i} 
-          channelId={channelData.channelId}
-          channelIcon={channelData.avatar[2].url}
+          channelId={item.video.author.channelId}
+          channelIcon={item.video.author.avatar[0].url}
           videoId={item.video.videoId}
-          channelTitle={channelData.title}
+          channelTitle={item.video.author.title}
           videoTitle={item.video.title}
           viewCount={item.video.stats.views}
-          thumbnail={item.video.thumbnails[3].url} 
+          thumbnail={item.video.thumbnails[1].url} 
           duration={item.video.lengthSeconds}
           publishedAt={item.video.publishedTimeText}
           fullSidebar={fullSidebar}

@@ -1,0 +1,13 @@
+.channel-card{
+    width: 360px;
+    height: 350px;
+    cursor: pointer;
+}
+
+.channel-icon{
+    width: 150px;
+}
+
+.channel-icon-img{
+    width: 150px;
+}
