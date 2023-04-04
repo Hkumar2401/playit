@@ -1,7 +1,6 @@
 import './videocard.css'
 import { useState, useEffect } from 'react'
-import moment from 'moment/moment';
-moment().format();
+import { Link } from 'react-router-dom';
 
 const VideoCard = (props) => {
 
@@ -9,15 +8,6 @@ const VideoCard = (props) => {
 
   const [duration, setDuration] = useState('');
   const [views, setViews] = useState(0);
-
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': '81d0a0f8d4mshf9fd9ba2956eeabp1820a4jsnfc7929700ec8',
-      'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
-    }
-  };
-  
 
   useEffect(()=>{
     handleDuration();
@@ -45,10 +35,14 @@ const VideoCard = (props) => {
     }
     setViews(views);
   }
+
+
   
 
   return (
-    <div className={`flex flex-col mt-5 ml-2 mr-2  ${fullSidebar ? 'video-card-full-sidebar' : 'video-card-not-full-sidebar'}`}>
+    <Link to={`/video/${props.videoId}`}>
+    <div className={`flex flex-col mt-5 ml-2 mr-2  ${fullSidebar ? 'video-card-full-sidebar' : 'video-card-not-full-sidebar'}`}
+    >
       <div className="top relative">
         <img className='thumbnail' src={props.thumbnail} alt="" />
         <p className="duration text-sm pl-1 pr-1">
@@ -79,6 +73,7 @@ const VideoCard = (props) => {
       
       </div>
     </div>
+    </Link>
   )
 }
 

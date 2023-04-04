@@ -1,19 +1,19 @@
 import './videosection.css'
 import VideoCard from '../VideoCard/VideoCard';
 import { useState, useEffect } from 'react';
-import ChannelCard from '../ChannelCard/ChannelCard';
-import PlaylistCard from '../PlaylistCard/PlaylistCard';
-
+import SkeletonVideoCard from '../SkeletonVideoCard/SkeletonVideoCard';
 
 const Videosection = ({fullSidebar}) => {
 
   const [popularVideosData, setPopularVideosData] = useState([]);
 
-  const [url, setUrl] = useState('search/?q=cleverprogrammer');
+  const url = 'search/?q=cleverprogrammer';
+
+  const [loading, setLoading] = useState(false);
 
 const BASE_URL = 'https://youtube138.p.rapidapi.com';
 
-  
+   
   const options = {
     method: 'GET',
     headers: {
@@ -27,21 +27,22 @@ const BASE_URL = 'https://youtube138.p.rapidapi.com';
     const fetchFromApi = async () =>{
 
 
-      await fetch(`${BASE_URL}/${url}`, options)
-          .then(async(response) =>  {
-            return await response.json();
-          })
-          .then(response => {
-            console.log(response.contents);
-            setPopularVideosData(response.contents);
-          })
-          .catch(err => console.error(err));
-  
+      setLoading(true);
+      try{
+
+        const response = await fetch(`${BASE_URL}/${url}&hl=en&gl=US`, options);
+        const data = await response.json();
+        console.log(data.contents);
+        setPopularVideosData(data.contents);
+        setLoading(false);
+        
+      }catch(error){
+        console.log(error);
+      }
           
-    }
+    }  
 
     fetchFromApi();
-    
   }, []);
 
   
@@ -51,6 +52,7 @@ const BASE_URL = 'https://youtube138.p.rapidapi.com';
       popularVideosData.map((item, i)=>{
         return (
           item.type==="video" &&
+
           <VideoCard
           key={i} 
           channelId={item.video.author.channelId}
@@ -63,8 +65,10 @@ const BASE_URL = 'https://youtube138.p.rapidapi.com';
           duration={item.video.lengthSeconds}
           publishedAt={item.video.publishedTimeText}
           fullSidebar={fullSidebar}
-
           />
+
+        
+
         );
       })
     }

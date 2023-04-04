@@ -2,6 +2,7 @@ import React from 'react'
 import Sidebar from '../Sidebar/Sidebar'
 import VideoSection from '../VideoSection/VideoSection'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import VideoDetails from '../VideoDetails/VideoDetails'
 
 
 const Feed = ({fullSidebar, setFullSidebar}) => {
@@ -18,6 +19,8 @@ const Feed = ({fullSidebar, setFullSidebar}) => {
             fullSidebar={fullSidebar}
           />
           } />
+
+            <Route path='/video/:id' element={<VideoDetails />} />
           </Routes>
     </div>
     </BrowserRouter>

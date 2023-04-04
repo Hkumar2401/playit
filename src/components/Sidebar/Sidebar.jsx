@@ -1,4 +1,6 @@
 import './sidebar.css'
+import { useState, useContext } from 'react';
+import { HideSidebarContext} from '../../App';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import WhatshotOutlinedIcon from '@mui/icons-material/WhatshotOutlined';
 import SubscriptionsOutlinedIcon from '@mui/icons-material/SubscriptionsOutlined';
@@ -19,11 +21,13 @@ import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
 
+
 const Sidebar = ({fullSidebar}) => {
 
+  const hideSidebar = useContext(HideSidebarContext);
   
   return (
-    <div>
+    <div style={{display: hideSidebar ? 'block' : 'block'}}>
 
     {fullSidebar ?
       <div className='sidebar pl-2'>
