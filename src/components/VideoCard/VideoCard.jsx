@@ -16,6 +16,13 @@ const VideoCard = (props) => {
   
   const handleDuration = () =>{
     let duration = props.duration;
+    let date = new Date(null);
+    date.setSeconds(duration);
+    duration = date.toISOString().substring(11, 19);
+    console.log(duration);
+    if(duration.startsWith("00:")){
+      duration = duration.replace("00:", " ");
+    }
 
     setDuration(duration);
   }
