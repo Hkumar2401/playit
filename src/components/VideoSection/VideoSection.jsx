@@ -11,7 +11,7 @@ const Videosection = ({fullSidebar}) => {
 
   const [loading, setLoading] = useState(false);
 
-const BASE_URL = 'https://youtube138.p.rapidapi.com';
+  const BASE_URL = 'https://youtube138.p.rapidapi.com';
 
    
   const options = {
@@ -27,18 +27,19 @@ const BASE_URL = 'https://youtube138.p.rapidapi.com';
     const fetchFromApi = async () =>{
 
 
-      setLoading(true);
       try{
-
+        
+        setLoading(true);
         const response = await fetch(`${BASE_URL}/${url}&hl=en&gl=US`, options);
         const data = await response.json();
-        console.log(data.contents);
-        setPopularVideosData(data.contents);
-        setLoading(false);
+        // console.log(data.contents);
+        
+        setPopularVideosData(data.contents.filter((item)=> item.type==='video'));
         
       }catch(error){
         console.log(error);
       }
+      setLoading(false);
           
     }  
 
@@ -51,8 +52,11 @@ const BASE_URL = 'https://youtube138.p.rapidapi.com';
     {
       popularVideosData.map((item, i)=>{
         return (
-          item.type==="video" &&
-
+          loading ? 
+            <SkeletonVideoCard 
+              fullSidebar={fullSidebar}
+            />
+            :
           <VideoCard
           key={i} 
           channelId={item.video.author.channelId}
@@ -61,7 +65,7 @@ const BASE_URL = 'https://youtube138.p.rapidapi.com';
           channelTitle={item.video.author.title}
           videoTitle={item.video.title}
           viewCount={item.video.stats.views}
-          thumbnail={item.video.thumbnails[1].url} 
+          thumbnail={item.video.thumbnails[0].url} 
           duration={item.video.lengthSeconds}
           publishedAt={item.video.publishedTimeText}
           fullSidebar={fullSidebar}

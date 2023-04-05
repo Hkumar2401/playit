@@ -1,19 +1,14 @@
 import React from 'react'
-import { useState, createContext } from 'react'
+import { useState } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Feed from './components/Feed/Feed'
-
-const HideSidebarContext = createContext();
 
 const App = () => {
 
   const [fullSidebar, setFullSidebar] = useState(true);
-
-  const [hideSidebar, setHideSidebar] = useState(false);
   
   return (
     <div className='App relative'>
-    <HideSidebarContext.Provider value={{hideSidebar, setHideSidebar}}>
       <Navbar 
         fullSidebar={fullSidebar}
         setFullSidebar={setFullSidebar}
@@ -23,10 +18,8 @@ const App = () => {
         fullSidebar={fullSidebar}
         setFullSidebar={setFullSidebar}
       />
-    </HideSidebarContext.Provider>
     </div>
   )
 }
 
 export default App
-export {HideSidebarContext}

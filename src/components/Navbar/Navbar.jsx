@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import './navbar.css'
 import VideoCallOutlinedIcon from '@mui/icons-material/VideoCallOutlined';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
@@ -8,7 +9,7 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 
-const Navbar = ({fullSidebar, setFullSidebar}) => {
+const Navbar = (props) => {
 
   const hamburgerButton = useRef();
   const searchIconOnFocus = useRef();
@@ -19,10 +20,10 @@ const Navbar = ({fullSidebar, setFullSidebar}) => {
 
   
   const handleClick = () =>{
-    if(fullSidebar==true){
-      setFullSidebar(false);
+    if(props.fullSidebar==true){
+      props.setFullSidebar(false);
     } else{
-      setFullSidebar(true);
+      props.setFullSidebar(true);
     }
   }
   

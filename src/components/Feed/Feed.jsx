@@ -5,19 +5,22 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import VideoDetails from '../VideoDetails/VideoDetails'
 
 
-const Feed = ({fullSidebar, setFullSidebar}) => {
+const Feed = ({fullSidebar}) => {
   return (
     <BrowserRouter>
     <div className="body flex">
-          <Sidebar 
-            fullSidebar={fullSidebar}
-          />
+          
           
           <Routes>
             <Route path='/' element={
-            <VideoSection 
-            fullSidebar={fullSidebar}
-          />
+              <>
+                <Sidebar 
+                  fullSidebar={fullSidebar}
+                />
+                <VideoSection 
+                  fullSidebar={fullSidebar}
+                />
+            </>
           } />
 
             <Route path='/video/:id' element={<VideoDetails />} />

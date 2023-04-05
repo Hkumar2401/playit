@@ -1,0 +1,15 @@
+.video-player-details{
+    max-width: 1250px;
+}
+
+.light-gray-color{
+    background-color: rgb(226, 226, 226);
+}
+
+.cta-button-color{
+    background-color: rgb(226, 226, 226);
+}
+
+.cta-button-color:hover{
+    background-color: rgb(215, 215, 215);
+}
