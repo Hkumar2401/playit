@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import './relatedvideoscard.css'
+import { Link } from 'react-router-dom';
 
 const RelatedVideosCard = (props) => {
 
@@ -26,6 +27,7 @@ const RelatedVideosCard = (props) => {
     },[])
     
   return (
+    <Link to={`/video/${props.videoId}`}>
     <div className='related-videos-card flex mt-1'>
         <div className='related-video-thumbnail-section'>
             <img className='related-video-thumbnail' src={props.thumbnail} alt="" />
@@ -41,6 +43,7 @@ const RelatedVideosCard = (props) => {
             </div>
         </div>
     </div>
+    </Link>
   )
 }
 

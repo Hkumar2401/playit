@@ -32,7 +32,7 @@ const Videosection = ({fullSidebar}) => {
         setLoading(true);
         const response = await fetch(`${BASE_URL}/${url}&hl=en&gl=US`, options);
         const data = await response.json();
-        // console.log(data.contents);
+        console.log(data.contents);
         
         setPopularVideosData(data.contents.filter((item)=> item.type==='video'));
         
@@ -66,6 +66,7 @@ const Videosection = ({fullSidebar}) => {
           videoTitle={item.video.title}
           viewCount={item.video.stats.views}
           thumbnail={item.video.thumbnails[0].url} 
+          movingThumbnail={item.video.movingThumbnails[0].url}
           duration={item.video.lengthSeconds}
           publishedAt={item.video.publishedTimeText}
           fullSidebar={fullSidebar}

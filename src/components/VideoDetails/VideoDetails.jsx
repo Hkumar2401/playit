@@ -9,6 +9,7 @@ import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
 import ContentCutOutlinedIcon from '@mui/icons-material/ContentCutOutlined';
 import PlaylistAddOutlinedIcon from '@mui/icons-material/PlaylistAddOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
+import CommentCard from '../CommentCard/CommentCard'
 
 const VideoDetails = () => {
 
@@ -92,7 +93,7 @@ const VideoDetails = () => {
           try{
             const response = await fetch(`${BASE_URL}/video/comments/?id=${id}&hl=en&gl=US`, options);
             const data = await response.json();
-            console.log(data.comments);
+            // console.log(data.comments);
             setCommentData(data.comments);
           }catch(error){
             console.log(error);
@@ -103,7 +104,7 @@ const VideoDetails = () => {
       fetchVideoComments();
       fetchVideoDetails();
       fetchRelatedVideos();
-    },[])
+    },[id])
 
     const opts = {
       height: '750',
@@ -113,7 +114,7 @@ const VideoDetails = () => {
 
     
   return (
-    <div className='video-details flex mt-10 mx-auto ml-24'>
+    <div className='video-details flex mt-10 mx-auto ml-20'>
 
     <div className='video-player-section mr-8'>
       <div className='video-player'>
@@ -208,27 +209,23 @@ const VideoDetails = () => {
         <div className="comment-section mt-5">
           <p>{videoData.stats.comments} Comments</p>
 
-          <div className="comment-display flex">
-
-            <div className='comment-display-avatar'>
-              <img className='rounded-3xl w-10' src={'https://yt3.ggpht.com/ytc/AL5GRJW6bgLOwelsRuiDxHqUhV6XDMzvcnHmlEVRD7AG9jRn2wrz0NkqFqmrnEsm8kfE=s48-c-k-c0x00ffffff-no-rj'} alt="" />
-            </div>
-
-            <div className="comment-display-contents ml-4 flex flex-col">
-              <div className='flex'>
-                <p className='text-sm font-bold'>Jaz_3001</p>
-                <p className='text-sm ml-2'>1 day ago</p>
-              </div>
-
-              <p className='mt-1'>Making money is an action. Keeping money is behavior. Growing money is knowledge..</p>
-
-              <div className='comment-buttons'>
-                <button className='rounded-xl light-gray-color p-2'><ThumbUpOutlinedIcon /> </button>
-                <button className='rounded-xl light-gray-color p-2'><ThumbDownOffAltOutlinedIcon /> </button>
-              </div>
-
-            </div>
-
+          <div className='comments'>
+              
+              {
+                commentData.map((item,i)=>{
+                  return (
+                    <CommentCard 
+                      key={i}
+                      avatar={item.author.avatar[0].url}
+                      title={item.author.title}
+                      publishedAt={item.publishedTimeText}
+                      content={item.content}
+                      votes={item.stats.votes}
+                    />
+                  );
+                })
+              }
+              
           </div>
           
         </div>
@@ -239,12 +236,13 @@ const VideoDetails = () => {
 
     </div>
 
-    <div className='related-videos'>
+    <div className='related-videos mr-10'>
       {
         relatedVideoData.map((item, i)=>{
           return (
             <RelatedVideosCard 
               key={i}
+              videoId={item.video.videoId}
               thumbnail={item.video.thumbnails[0].url}
               title={item.video.title}
               channelName={item.video.author.title}

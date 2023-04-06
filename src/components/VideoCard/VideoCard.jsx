@@ -1,9 +1,11 @@
 import './videocard.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom';
 
 const VideoCard = (props) => {
 
+  const thumbnailRef = useRef();
+  
   const fullSidebar = props.fullSidebar;
 
   const [duration, setDuration] = useState('');
@@ -19,7 +21,6 @@ const VideoCard = (props) => {
     let date = new Date(null);
     date.setSeconds(duration);
     duration = date.toISOString().substring(11, 19);
-    console.log(duration);
     if(duration.startsWith("00:")){
       duration = duration.replace("00:", " ");
     }
@@ -43,15 +44,23 @@ const VideoCard = (props) => {
     setViews(views);
   }
 
+  const mouseOver = () =>{
+    thumbnailRef.current.src = props.movingThumbnail;
+  }
+
+  const mouseOut = () =>{
+    thumbnailRef.current.src = props.thumbnail;
+  }
+
 
   
 
   return (
     <Link to={`/video/${props.videoId}`}>
-    <div className={`flex flex-col mt-5 ml-2 mr-2  ${fullSidebar ? 'video-card-full-sidebar' : 'video-card-not-full-sidebar'}`}
+    <div className={`flex flex-col mt-5 ml-2 mr-2  ${fullSidebar ? 'video-card-full-sidebar' : 'video-card-not-full-sidebar'}`} onMouseOver={mouseOver} onMouseOut={mouseOut}
     >
       <div className="top relative">
-        <img className='thumbnail' src={props.thumbnail} alt="" />
+        <img className='thumbnail' ref={thumbnailRef} src={props.thumbnail} alt="" />
         <p className="duration text-sm pl-1 pr-1">
         {
           duration
