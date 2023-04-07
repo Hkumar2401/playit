@@ -47,11 +47,12 @@ const SearchSection = () => {
                         <SearchVideoCard 
                             key={i}
                             videoId={item.video.videoId}
-                            thumbnail={item.video.thumbnails[0].url}
+                            thumbnail={item.video.thumbnails.reverse()[0].url}
+                            movingThumbnail={item.video.movingThumbnails === null ? null : item.video.movingThumbnails[0].url}
                             title={item.video.title}
                             viewCount={item.video.stats.views}
                             publishedAt={item.video.publishedTimeText}
-                            channelIcon={item.video.author.avatar[0].url}
+                            channelIcon={item.video.author.avatar.reverse()[0].url}
                             channelTitle={item.video.author.title}
                             description={item.video.descriptionSnippet}
                         />
@@ -60,7 +61,7 @@ const SearchSection = () => {
                         <SearchChannelCard 
                             key={i}
                             channelId={item.channel.channelId}
-                            channelIcon={item.channel.avatar[0].url}
+                            channelIcon={item.channel.avatar.reverse()[0].url}
                             channelTitle={item.channel.title}
                             channelUsername={item.channel.username}
                             subscribersCount={item.channel.stats.subscribersText}
@@ -70,7 +71,7 @@ const SearchSection = () => {
                         <SearchPlaylistCard 
                             key={i}
                             playlistId={item.playlist.playlistId}
-                            thumbnail={item.playlist.thumbnails[3].url}
+                            thumbnail={item.playlist.thumbnails.reverse()[0].url}
                             playlistTitle={item.playlist.title}
                             channelTitle={item.playlist.author.title}
                         />

@@ -1,10 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import './searchvideocard.css'
 import { Link } from 'react-router-dom';
 
 const SearchVideoCard = (props) => {
 
   const [views, setViews] = useState();
+
+  const thumbnailRef = useRef();
   
 
   
@@ -29,12 +31,23 @@ const SearchVideoCard = (props) => {
   },[])
 
   
+  const handleMouseOver = () =>{
+    if(props.movingThumbnail !== null){
+      thumbnailRef.current.src = props.movingThumbnail;
+    }
+  }
+  
+  const handleMouseOut = () =>{
+    thumbnailRef.current.src = props.thumbnail;
+  }
+  
+  
   return (
     <Link to={`/video/${props.videoId}`}>
-    <div className='search-video-card flex mt-5 cursor-pointer'>
+    <div className='search-video-card flex mt-5 cursor-pointer' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
 
         <div className="thumbnail-section">
-            <img className='search-video-card-thumbnail rounded-xl' src={props.thumbnail} alt="" />
+            <img ref={thumbnailRef} className='search-video-card-thumbnail rounded-xl' src={props.thumbnail} alt="" />
         </div>
 
         <div className='search-video-card-content ml-4 p-1'>

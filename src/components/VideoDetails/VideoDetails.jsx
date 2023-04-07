@@ -216,7 +216,7 @@ const VideoDetails = () => {
                   return (
                     <CommentCard 
                       key={i}
-                      avatar={item.author.avatar[2].url}
+                      avatar={item.author.avatar.reverse()[0].url}
                       title={item.author.title}
                       publishedAt={item.publishedTimeText}
                       content={item.content}
@@ -243,7 +243,7 @@ const VideoDetails = () => {
             <RelatedVideosCard 
               key={i}
               videoId={item.video.videoId}
-              thumbnail={item.video.thumbnails[0].url}
+              thumbnail={item.video.thumbnails.reverse()[0].url}
               title={item.video.title}
               channelName={item.video.author.title}
               viewCount={item.video.stats.views}
