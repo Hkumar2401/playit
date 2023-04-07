@@ -8,7 +8,7 @@ const CommentCard = (props) => {
     <div className="comment-display flex mt-10">
 
             <div className='comment-display-avatar'>
-              <img className='rounded-3xl w-10' src={props.avatar} alt="" />
+              <img className='rounded-3xl avatar' src={props.avatar} alt="" />
             </div>
 
             <div className="comment-display-contents ml-4 flex flex-col">
@@ -17,7 +17,7 @@ const CommentCard = (props) => {
                 <p className='text-sm ml-2'>{props.publishedAt}</p>
               </div>
 
-              <p className='mt-1'>{props.content}</p>
+              <p className='mt-1 comment-content'>{props.content}</p>
 
               <div className='comment-buttons flex'>
                 <div className='flex items-center mr-2'>

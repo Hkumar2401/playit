@@ -2,12 +2,14 @@ import './videosection.css'
 import VideoCard from '../VideoCard/VideoCard';
 import { useState, useEffect } from 'react';
 import SkeletonVideoCard from '../SkeletonVideoCard/SkeletonVideoCard';
+import { useParams } from 'react-router-dom';
 
 const Videosection = ({fullSidebar}) => {
 
+
   const [popularVideosData, setPopularVideosData] = useState([]);
 
-  const url = 'search/?q=cleverprogrammer';
+  const url = `search/?q=ohara`;
 
   const [loading, setLoading] = useState(false);
 
@@ -32,7 +34,7 @@ const Videosection = ({fullSidebar}) => {
         setLoading(true);
         const response = await fetch(`${BASE_URL}/${url}&hl=en&gl=US`, options);
         const data = await response.json();
-        console.log(data.contents);
+        // console.log(data.contents);
         
         setPopularVideosData(data.contents.filter((item)=> item.type==='video'));
         

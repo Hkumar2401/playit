@@ -1,4 +1,12 @@
+.avatar{
+    min-width: 45px;
+    max-width: 45px;
+}
+
 .comment-button:hover{
     background-color: rgb(226, 226, 226);
+}
 
+.comment-content{
+    max-width: 85%;
 }

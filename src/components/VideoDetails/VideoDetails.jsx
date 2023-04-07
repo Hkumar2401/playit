@@ -65,7 +65,7 @@ const VideoDetails = () => {
         try{
           const response = await fetch(`${BASE_URL}/video/related-contents/?id=${id}&hl=en&gl=US`, options);
           const data = await response.json();
-          // console.log(data.contents);
+          console.log(data.contents);
           setRelatedVideoData(data.contents);
         }catch(error){
           console.log(error);
@@ -93,7 +93,7 @@ const VideoDetails = () => {
           try{
             const response = await fetch(`${BASE_URL}/video/comments/?id=${id}&hl=en&gl=US`, options);
             const data = await response.json();
-            // console.log(data.comments);
+            console.log(data.comments);
             setCommentData(data.comments);
           }catch(error){
             console.log(error);
@@ -216,7 +216,7 @@ const VideoDetails = () => {
                   return (
                     <CommentCard 
                       key={i}
-                      avatar={item.author.avatar[0].url}
+                      avatar={item.author.avatar[2].url}
                       title={item.author.title}
                       publishedAt={item.publishedTimeText}
                       content={item.content}

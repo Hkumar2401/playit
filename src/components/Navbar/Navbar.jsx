@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './navbar.css'
 import VideoCallOutlinedIcon from '@mui/icons-material/VideoCallOutlined';
@@ -26,6 +26,9 @@ const Navbar = (props) => {
       props.setFullSidebar(true);
     }
   }
+
+  
+  
   
   return (
     <div className="navbar flex justify-between items-center pl-2 pr-2">
@@ -38,20 +41,32 @@ const Navbar = (props) => {
             </button>
           </div>
 
+          <Link to={'/'}>
           <div title='Youtube Home' className="youtube-icon ml-5 mt-1 flex items-center cursor-pointer">
               <img className='w-8' src={YoutubeIcon} alt="" />
               <p className='font-semibold text-2xl ml-1'>Youtube <sup className='font-light text-xs text-gray-500'>IN</sup> </p>
           </div>
+          </Link>
         </div>
 
         <div className="search-section pt-2 flex items-center">
           <button className='search-icon-focus'  ref={searchIconOnFocus}><SearchRoundedIcon fontSize='large' className='p-1' /></button>
-          <input className='search-input' onFocus={()=> searchIconOnFocus.current.style.display = 'block'} onBlur={()=> searchIconOnFocus.current.style.display = 'none'} placeholder='Search' type="text" name="" id="" />
+          <input 
+            value={props.search}
+            onChange={(e) => props.setSearch(e.target.value)}
+            className='search-input' 
+            onFocus={()=> searchIconOnFocus.current.style.display = 'block'} 
+            onBlur={()=> searchIconOnFocus.current.style.display = 'none'} 
+            placeholder='Search' 
+            type="text" 
+          />
           
+        <Link to={`/search/${props.search}`}>
           <button className='search-icon relative' onMouseOver={()=> hoverTitleSearch.current.style.display = 'block'} onMouseOut={()=> hoverTitleSearch.current.style.display = 'none'}>
             <SearchRoundedIcon fontSize='large' className='p-1' />
             <p className='hover-titles hover-title-search' ref={hoverTitleSearch}>Search</p>
           </button>
+          </Link>
 
           <button className='search-mic-icon ml-4 relative' onMouseOver={()=> hoverTitleMic.current.style.display = 'block'} onMouseOut={()=> hoverTitleMic.current.style.display = 'none'}>
             <MicIcon />

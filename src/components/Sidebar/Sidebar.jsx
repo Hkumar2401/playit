@@ -18,6 +18,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
+import { Link } from 'react-router-dom';
 
 
 const Sidebar = ({fullSidebar}) => {
@@ -27,15 +28,15 @@ const Sidebar = ({fullSidebar}) => {
 
     {fullSidebar ?
       <div className='sidebar pl-2'>
-    
+
       <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Home'>
         <button><HomeOutlinedIcon /></button>
-        <p className='pl-6 pt-1'>Home</p>
+        <p className='pl-6 pt-1'>Ohara</p>
       </div>
 
       <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Subscriptions'>
         <button><SubscriptionsOutlinedIcon /></button>
-        <p className='pl-6 pt-1'>Subscriptions</p>
+        <p className='pl-6 pt-1'>Clever Programmer</p>
       </div>
 
       <hr className='h-0.5 mt-2 mb-2 border-0 bg-zinc-200' />
