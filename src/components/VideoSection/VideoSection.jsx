@@ -9,7 +9,11 @@ const Videosection = ({fullSidebar}) => {
 
   const [popularVideosData, setPopularVideosData] = useState([]);
 
-  const {sidebarQuery} = useParams();
+  let {sidebarQuery} = useParams();
+  
+  if(sidebarQuery === undefined){
+    sidebarQuery = 'ohara';
+  }
 
 
   const [loading, setLoading] = useState(false);
@@ -33,7 +37,7 @@ const Videosection = ({fullSidebar}) => {
       try{
         
         setLoading(true);
-        const response = await fetch(`${BASE_URL}/search/?q=${sidebarQuery}&hl=en&gl=IN`, options);
+        const response = await fetch(`${BASE_URL}/search/?q=${sidebarQuery}&hl=en&gl=US`, options);
         const data = await response.json();
         // console.log(data.contents);
         
@@ -61,7 +65,7 @@ const Videosection = ({fullSidebar}) => {
             />
             :
           <VideoCard
-          key={i} 
+            key={i} 
             channelId={item.video.author.channelId}
             channelIcon={item.video.author.avatar.reverse()[0].url}
             videoId={item.video.videoId}

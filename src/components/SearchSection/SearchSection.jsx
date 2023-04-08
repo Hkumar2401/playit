@@ -27,10 +27,17 @@ const SearchSection = () => {
     useEffect(()=>{
 
         const fetchSearchData = async () =>{
-            const res = await fetch(`${BASE_URL}/?q=${query}`, options);
-            const data = await res.json();
-            console.log(data.contents);
-            setSearchData(data.contents);
+            try{
+
+                const res = await fetch(`${BASE_URL}/?q=${query}&hl=en&gl=US`, options);
+                const data = await res.json();
+                console.log(data.contents);
+                setSearchData(data.contents);
+            }catch(err){
+                console.log(err);
+            }
+            
+            
         }
         
         fetchSearchData();
@@ -41,7 +48,7 @@ const SearchSection = () => {
         {
             searchData.map((item, i)=>{
                 return (
-                    <>
+                    <div key={i}>
                     {
                         item.type === "video" ? 
                         <SearchVideoCard 
@@ -78,7 +85,7 @@ const SearchSection = () => {
 
 
                     }
-                    </>
+                    </div>
                 );
             })
         }

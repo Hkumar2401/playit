@@ -1,0 +1,19 @@
+.channel-section-full-sidebar{
+    max-width: 1630px;
+    min-width: 1630px;
+}
+
+.channel-section-not-full-sidebar{
+    max-width: 1810px;
+    min-width: 1810px;
+}
+
+.banner-section{
+    width: 100%;
+    max-height: 300px;
+    min-height: 270px;
+}
+
+.channel-details{
+    width: 100%;
+}

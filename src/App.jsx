@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar/Sidebar'
 import VideoDetails from './components/VideoDetails/VideoDetails'
 import VideoSection from './components/VideoSection/VideoSection'
 import SearchSection from './components/SearchSection/SearchSection'
+import ChannelSectionCard from './components/ChannelSection/ChannelSectionCard'
 
 const App = () => {
 
@@ -62,6 +63,19 @@ const App = () => {
                 />
             </div>
           }/>
+
+          <Route path='channel/details/:channelId' element={
+            <div className='flex'>
+                <Sidebar 
+                  fullSidebar={fullSidebar}
+                />
+                <ChannelSectionCard
+                  fullSidebar={fullSidebar}
+                />
+            </div>
+          } />
+
+          
 
 
         </Routes>

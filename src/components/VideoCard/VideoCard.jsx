@@ -69,7 +69,7 @@ const VideoCard = (props) => {
       </div>
 
       <div className="bottom flex">
-        <div className='pt-4'>
+        <div className={`pt-4 ${props.channelIcon === undefined && 'hidden'}`}>
           <img className='channel-icon' src={props.channelIcon} alt="" />
         </div>
 

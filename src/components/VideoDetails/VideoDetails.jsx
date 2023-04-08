@@ -240,6 +240,7 @@ const VideoDetails = () => {
       {
         relatedVideoData.map((item, i)=>{
           return (
+            item.type === 'video' &&
             <RelatedVideosCard 
               key={i}
               videoId={item.video.videoId}
