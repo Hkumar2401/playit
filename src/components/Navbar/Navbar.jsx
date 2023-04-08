@@ -41,7 +41,7 @@ const Navbar = (props) => {
             </button>
           </div>
 
-          <Link to={'/'}>
+          <Link to={'/category/ohara'}>
           <div title='Youtube Home' className="youtube-icon ml-5 mt-1 flex items-center cursor-pointer">
               <img className='w-8' src={YoutubeIcon} alt="" />
               <p className='font-semibold text-2xl ml-1'>Youtube <sup className='font-light text-xs text-gray-500'>IN</sup> </p>

@@ -17,7 +17,7 @@ const CommentCard = (props) => {
                 <p className='text-sm ml-2'>{props.publishedAt}</p>
               </div>
 
-              <p className='mt-1 comment-content'>{props.content}</p>
+              <p className='mt-1 comment-content line-clamp-6'>{props.content}</p>
 
               <div className='comment-buttons flex'>
                 <div className='flex items-center mr-2'>

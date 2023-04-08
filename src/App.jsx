@@ -52,6 +52,18 @@ const App = () => {
             </div>
           } />
 
+          <Route path='/category/:sidebarQuery' element={
+            <div className='flex'>
+                <Sidebar 
+                  fullSidebar={fullSidebar}
+                />
+                <VideoSection 
+                  fullSidebar={fullSidebar}
+                />
+            </div>
+          }/>
+
+
         </Routes>
       </div>
     </BrowserRouter>

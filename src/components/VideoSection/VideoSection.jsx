@@ -9,7 +9,8 @@ const Videosection = ({fullSidebar}) => {
 
   const [popularVideosData, setPopularVideosData] = useState([]);
 
-  const url = `search/?q=ohara`;
+  const {sidebarQuery} = useParams();
+
 
   const [loading, setLoading] = useState(false);
 
@@ -32,7 +33,7 @@ const Videosection = ({fullSidebar}) => {
       try{
         
         setLoading(true);
-        const response = await fetch(`${BASE_URL}/${url}&hl=en&gl=US`, options);
+        const response = await fetch(`${BASE_URL}/search/?q=${sidebarQuery}&hl=en&gl=IN`, options);
         const data = await response.json();
         // console.log(data.contents);
         
@@ -46,7 +47,7 @@ const Videosection = ({fullSidebar}) => {
     }  
 
     fetchFromApi();
-  }, []);
+  }, [sidebarQuery]);
 
   
   return (
@@ -61,17 +62,17 @@ const Videosection = ({fullSidebar}) => {
             :
           <VideoCard
           key={i} 
-          channelId={item.video.author.channelId}
-          channelIcon={item.video.author.avatar.reverse()[0].url}
-          videoId={item.video.videoId}
-          channelTitle={item.video.author.title}
-          videoTitle={item.video.title}
-          viewCount={item.video.stats.views}
-          thumbnail={item.video.thumbnails.reverse()[0].url} 
-          movingThumbnail={item.video.movingThumbnails.reverse()[0].url}
-          duration={item.video.lengthSeconds}
-          publishedAt={item.video.publishedTimeText}
-          fullSidebar={fullSidebar}
+            channelId={item.video.author.channelId}
+            channelIcon={item.video.author.avatar.reverse()[0].url}
+            videoId={item.video.videoId}
+            channelTitle={item.video.author.title}
+            videoTitle={item.video.title}
+            viewCount={item.video.stats.views}
+            thumbnail={item.video.thumbnails.reverse()[0].url} 
+            movingThumbnail={item.video.movingThumbnails === null ? null : item.video.movingThumbnails.reverse()[0].url}
+            duration={item.video.lengthSeconds}
+            publishedAt={item.video.publishedTimeText}
+            fullSidebar={fullSidebar}
           />
 
         

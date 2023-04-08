@@ -29,15 +29,20 @@ const Sidebar = ({fullSidebar}) => {
     {fullSidebar ?
       <div className='sidebar pl-2'>
 
-      <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Home'>
-        <button><HomeOutlinedIcon /></button>
-        <p className='pl-6 pt-1'>Ohara</p>
-      </div>
+        <Link to={`/category/ohara`}>
+        <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Home'>
+          <button><HomeOutlinedIcon /></button>
+          <p className='pl-6 pt-1'>Ohara</p>
+        </div>
+        </Link>
 
-      <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Subscriptions'>
-        <button><SubscriptionsOutlinedIcon /></button>
-        <p className='pl-6 pt-1'>Clever Programmer</p>
-      </div>
+
+      <Link to={`/category/clever programmer`}>
+        <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Subscriptions'>
+          <button><SubscriptionsOutlinedIcon /></button>
+          <p className='pl-6 pt-1'>Clever Programmer</p>
+        </div>
+      </Link>
 
       <hr className='h-0.5 mt-2 mb-2 border-0 bg-zinc-200' />
 
@@ -68,45 +73,62 @@ const Sidebar = ({fullSidebar}) => {
 
       <hr className='h-0.5 mt-2 mb-2 border-0 bg-zinc-200' />
 
-      <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Trending'>
-        <button><WhatshotOutlinedIcon /></button>
-        <p className='pl-6 pt-1'>Trending</p>
-      </div>
+      <Link to={`/category/trending`}>
+        <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Trending'>
+          <button><WhatshotOutlinedIcon /></button>
+          <p className='pl-6 pt-1'>Trending</p>
+        </div>
+      </Link>
 
-      <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Music'>
-        <button><MusicNoteOutlined /></button>
-        <p className='pl-6 pt-1'>Music</p>
-      </div>
+      <Link to={`/category/music`}>
+        <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Music'>
+          <button><MusicNoteOutlined /></button>
+          <p className='pl-6 pt-1'>Music</p>
+        </div>
+      </Link>
 
-      <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Movies'>
-        <button><MovieOutlinedIcon /></button>
-        <p className='pl-6 pt-1'>Movies</p>
-      </div>
+      <Link to={`/category/movies`}>
+        <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Movies'>
+          <button><MovieOutlinedIcon /></button>
+          <p className='pl-6 pt-1'>Movies</p>
+        </div>
+      </Link>
 
-      <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Gaming'>
-        <button><SportsEsportsOutlinedIcon /></button>
-        <p className='pl-6 pt-1'>Gaming</p>
-      </div>
+      <Link to={`/category/gaming`}>
+        <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Gaming'>
+          <button><SportsEsportsOutlinedIcon /></button>
+          <p className='pl-6 pt-1'>Gaming</p>
+        </div>
+      </Link>
 
-      <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='News'>
-        <button><NewspaperOutlinedIcon /></button>
-        <p className='pl-6 pt-1'>News</p>
-      </div>
+      <Link to={`/category/news`}>
+        <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='News'>
+          <button><NewspaperOutlinedIcon /></button>
+          <p className='pl-6 pt-1'>News</p>
+        </div>
+      </Link>
 
-      <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Sports'>
-        <button><EmojiEventsOutlinedIcon /></button>
-        <p className='pl-6 pt-1'>Sports</p>
-      </div>
+      <Link to={`/category/sports`}>
+        <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Sports'>
+          <button><EmojiEventsOutlinedIcon /></button>
+          <p className='pl-6 pt-1'>Sports</p>
+        </div>
+      </Link>
+        
+      <Link to={`/category/learning`}>
+        <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Learning'>
+          <button><LightbulbOutlinedIcon /></button>
+          <p className='pl-6 pt-1'>Learning</p>
+        </div>
+      </Link>
 
-      <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Learning'>
-        <button><LightbulbOutlinedIcon /></button>
-        <p className='pl-6 pt-1'>Learning</p>
-      </div>
-
-      <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Fashion & Beauty'>
-        <button><DiamondOutlinedIcon /></button>
-        <p className='pl-6 pt-1'>Fashion & Beauty</p>
-      </div>
+      <Link to={`/category/fashion and beauty`}>
+        <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Fashion & Beauty'>
+          <button><DiamondOutlinedIcon /></button>
+          <p className='pl-6 pt-1'>Fashion & Beauty</p>
+        </div>
+      </Link>
+        
 
       <hr className='h-0.5 mt-2 mb-2 border-0 bg-zinc-200' />
 
