@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 const SearchVideoCard = (props) => {
 
+  const {videoId, thumbnail, movingThumbnail, title, publishedAt, channelIcon, channelTitle, description, viewCount} = props;
+  
   const [views, setViews] = useState();
 
   const thumbnailRef = useRef();
@@ -11,7 +13,7 @@ const SearchVideoCard = (props) => {
 
   
   const handleViews = () =>{
-    let views = props.viewCount;
+    let views = viewCount;
     if(views<1000){
 
     } else if(views>=1000 && views<100000){
@@ -32,40 +34,40 @@ const SearchVideoCard = (props) => {
 
   
   const handleMouseOver = () =>{
-    if(props.movingThumbnail !== null){
-      thumbnailRef.current.src = props.movingThumbnail;
+    if(movingThumbnail !== null){
+      thumbnailRef.current.src = movingThumbnail;
     }
   }
   
   const handleMouseOut = () =>{
-    thumbnailRef.current.src = props.thumbnail;
+    thumbnailRef.current.src = thumbnail;
   }
   
   
   return (
-    <Link to={`/video/${props.videoId}`}>
+    <Link to={`/video/${videoId}`}>
     <div className='search-video-card flex mt-5 cursor-pointer' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
 
         <div className="thumbnail-section">
-            <img ref={thumbnailRef} className='search-video-card-thumbnail rounded-xl' src={props.thumbnail} alt="" />
+            <img ref={thumbnailRef} className='search-video-card-thumbnail rounded-xl' src={thumbnail} alt="" />
         </div>
 
         <div className='search-video-card-content ml-4 p-1'>
 
-            <p className='text-lg'>{props.title}</p>
+            <p className='text-lg'>{title}</p>
 
             <div className='flex'>
                 <p className='text-sm'>{views}</p>
                 <p className='ml-1 mr-1'>•</p>
-                <p className='text-sm'>{props.publishedAt}</p>
+                <p className='text-sm'>{publishedAt}</p>
             </div>
 
             <div className='flex items-center my-2'>
-              <img className='w-7 rounded-3xl' src={props.channelIcon} alt="" />
-              <p className='text-sm ml-3'>{props.channelTitle}</p>
+              <img className='w-7 rounded-3xl' src={channelIcon} alt="" />
+              <p className='text-sm ml-3'>{channelTitle}</p>
             </div>
 
-            <p className='mt-3 w-10/12'>{props.description}</p>
+            <p className='mt-3 w-10/12'>{description}</p>
 
 
 

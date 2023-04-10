@@ -17,3 +17,8 @@
 .channel-details{
     width: 100%;
 }
+
+.channel-section-channel-icon{
+    max-width: 200px;
+    min-width: 200px;
+}

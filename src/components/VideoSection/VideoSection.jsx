@@ -67,16 +67,19 @@ const Videosection = ({fullSidebar}) => {
           <VideoCard
             key={i} 
             channelId={item.video.author.channelId}
-            channelIcon={item.video.author.avatar.reverse()[0].url}
+            channelIcon={item.video.author.avatar[item.video.author.avatar.length-1].url}
             videoId={item.video.videoId}
             channelTitle={item.video.author.title}
             videoTitle={item.video.title}
             viewCount={item.video.stats.views}
-            thumbnail={item.video.thumbnails.reverse()[0].url} 
-            movingThumbnail={item.video.movingThumbnails === null ? null : item.video.movingThumbnails.reverse()[0].url}
+            thumbnail={item.video.thumbnails[item.video.thumbnails.length-1].url} 
+            movingThumbnail={item.video.movingThumbnails === null ? null : item.video.movingThumbnails[item.video.movingThumbnails.length-1].url}
             duration={item.video.lengthSeconds}
             publishedAt={item.video.publishedTimeText}
             fullSidebar={fullSidebar}
+            videoCardWidth={'360px'}
+            videoCardThumbnailWidth={`360px`}
+            videoCardThumbnailHeight={'202px'}
           />
 
         

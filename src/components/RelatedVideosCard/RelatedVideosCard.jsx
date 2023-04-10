@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 
 const RelatedVideosCard = (props) => {
 
+  const {videoId, thumbnail, title, channelName, publishedAt, viewCount} = props;
+  
     const [views, setViews] = useState();
     
     const handleViews = () =>{
-        let views = props.viewCount;
+        let views = viewCount;
         if(views<1000){
     
         } else if(views>=1000 && views<100000){
@@ -27,19 +29,19 @@ const RelatedVideosCard = (props) => {
     },[])
     
   return (
-    <Link to={`/video/${props.videoId}`}>
+    <Link to={`/video/${videoId}`}>
     <div className='related-videos-card flex mt-1'>
         <div className='related-video-thumbnail-section'>
-            <img className='related-video-thumbnail' src={props.thumbnail} alt="" />
+            <img className='related-video-thumbnail' src={thumbnail} alt="" />
         </div>
 
         <div className="related-video-detail-section ml-2">
-            <p className='line-clamp-2'>{props.title}</p>
-            <p className='text-sm'>{props.channelName}</p>
+            <p className='line-clamp-2'>{title}</p>
+            <p className='text-sm'>{channelName}</p>
             <div className='flex'>
                 <p className='text-sm'>{views}</p>
                 <p className='mx-1'>•</p>
-                <p className='text-sm'>{props.publishedAt}</p>
+                <p className='text-sm'>{publishedAt}</p>
             </div>
         </div>
     </div>

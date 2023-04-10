@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 
 const VideoCard = (props) => {
 
+  const {fullSidebar, videoId, videoCardWidth, videoCardThumbnailWidth, videoCardThumbnailHeight, durationPositionRight, thumbnail, movingThumbnail,  channelIcon, videoTitle, channelTitle, publishedAt, duration, viewCount} = props;
+  
   const thumbnailRef = useRef();
   
-  const fullSidebar = props.fullSidebar;
-
-  const [duration, setDuration] = useState('');
+  const [durationEdit, setDurationEdit] = useState('');
   const [views, setViews] = useState(0);
 
   useEffect(()=>{
@@ -17,19 +17,19 @@ const VideoCard = (props) => {
   },[]);
   
   const handleDuration = () =>{
-    let duration = props.duration;
+    let durationTemp = duration;
     let date = new Date(null);
-    date.setSeconds(duration);
-    duration = date.toISOString().substring(11, 19);
-    if(duration.startsWith("00:")){
-      duration = duration.replace("00:", " ");
+    date.setSeconds(durationTemp);
+    durationTemp = date.toISOString().substring(11, 19);
+    if(durationTemp.startsWith("00:")){
+      durationTemp = durationTemp.replace("00:", " ");
     }
 
-    setDuration(duration);
+    setDurationEdit(durationTemp);
   }
 
   const handleViews = () =>{
-    let views = props.viewCount;
+    let views = viewCount;
     if(views<1000){
 
     } else if(views>=1000 && views<100000){
@@ -45,45 +45,45 @@ const VideoCard = (props) => {
   }
 
   const mouseOver = () =>{
-    thumbnailRef.current.src = props.movingThumbnail;
+    thumbnailRef.current.src = movingThumbnail;
   }
 
   const mouseOut = () =>{
-    thumbnailRef.current.src = props.thumbnail;
+    thumbnailRef.current.src = thumbnail;
   }
 
 
   
 
   return (
-    <Link to={`/video/${props.videoId}`}>
-    <div className={`flex flex-col mt-5 ml-2 mr-2  ${fullSidebar ? 'video-card-full-sidebar' : 'video-card-not-full-sidebar'}`} onMouseOver={mouseOver} onMouseOut={mouseOut}
+    <Link to={`/video/${videoId}`}>
+    <div className={`flex flex-col mt-5 ml-2 mr-2  ${fullSidebar ? 'video-card-full-sidebar' : 'video-card-not-full-sidebar'}`} style={{width: videoCardWidth}} onMouseOver={mouseOver} onMouseOut={mouseOut}
     >
       <div className="top relative">
-        <img className='thumbnail' ref={thumbnailRef} src={props.thumbnail} alt="" />
-        <p className="duration text-sm pl-1 pr-1">
+        <img className='thumbnail' style={{width: videoCardThumbnailWidth, height: videoCardThumbnailHeight}} ref={thumbnailRef} src={thumbnail} alt="" />
+        <p className={`duration text-sm pl-1 pr-1 `}>
         {
-          duration
+          durationEdit
         }
         </p>
       </div>
 
       <div className="bottom flex">
-        <div className={`pt-4 ${props.channelIcon === undefined && 'hidden'}`}>
-          <img className='channel-icon' src={props.channelIcon} alt="" />
+        <div className={`pt-4 mr-3 ${channelIcon === undefined && 'hidden'}`}>
+          <img className='channel-icon' src={channelIcon} alt="" />
         </div>
 
-        <div className="details ml-3 pt-3 flex-col">
+        <div className={`details  pt-3 flex-col`}>
           <div>
-            <p className='font-bold'>{props.videoTitle}</p>
+            <p className='font-bold'>{videoTitle}</p>
           </div>
           <div>
-            <p>{props.channelTitle}</p>
+            <p>{channelTitle}</p>
           </div>
           <div>
             <span>{views}</span>
             <span className='ml-2 mr-2'>•</span>
-            <span>{props.publishedAt}</span>
+            <span>{publishedAt}</span>
           </div>
         </div>
       
