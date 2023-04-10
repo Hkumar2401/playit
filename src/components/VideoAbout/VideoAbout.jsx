@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './videoabout.css'
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbDownOffAltOutlinedIcon from '@mui/icons-material/ThumbDownOffAltOutlined';
@@ -9,6 +9,51 @@ import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import CommentCard from '../CommentCard/CommentCard'
 
 const VideoAbout = ({videoData, commentData}) => {
+
+
+  const [views, setViews] = useState();
+
+  const [likes, setLikes] = useState();
+
+  const handleViews = () =>{
+    let views = videoData.stats.views;
+    if(views<1000){
+
+    } else if(views>=1000 && views<100000){
+      views = `${Math.floor((views*10)/1000)/10}k`;
+    } else if(views>=100000 && views<1000000){
+      views = `${Math.floor((views*10)/1000)/10}k`;
+    } else if(views>=1000000 && views<1000000000){
+      views = `${Math.floor((views*10)/1000000)/10}M`;
+    } else if(views>=1000000000 && views<1000000000000){
+      views = `${Math.floor((views*10)/1000000000)/10}B`;
+    }
+    setViews(views);
+  }
+
+  const handleLikes = () =>{
+    let likes = videoData.stats.likes;
+    if(likes<1000){
+
+    } else if(likes>=1000 && likes<100000){
+      likes = `${Math.floor((likes*10)/1000)/10}k`;
+    } else if(likes>=100000 && likes<1000000){
+      likes = `${Math.floor((likes*10)/1000)/10}k`;
+    } else if(likes>=1000000 && likes<1000000000){
+      likes = `${Math.floor((likes*10)/1000000)/10}M`;
+    } else if(likes>=1000000000 && likes<1000000000000){
+      likes = `${Math.floor((likes*10)/1000000000)/10}B`;
+    }
+    setLikes(likes);
+  }
+
+  useEffect(()=>{
+    handleViews();
+    handleLikes();
+  },[])
+  
+  
+  
   return (
     <div className="video-player-details p-1 flex flex-col">
           <div>
@@ -37,7 +82,7 @@ const VideoAbout = ({videoData, commentData}) => {
             <div className='cta-buttons flex items-center'>
 
               <div className='cta-button light-gray-color rounded-3xl flex items-center mr-2'>
-                <button className='cta-button-color cursor-pointer rounded-l-3xl px-4 py-2'> <ThumbUpOutlinedIcon /> <span className='px-1'> {videoData.stats.likes} </span></button>
+                <button className='cta-button-color cursor-pointer rounded-l-3xl px-4 py-2'> <ThumbUpOutlinedIcon /> <span className='px-1'> {likes} </span></button>
                 <p className='text-gray-600'>|</p>
                 <button className='cta-button-color cursor-pointer rounded-r-3xl px-4 py-2'> <ThumbDownOffAltOutlinedIcon /> </button>
               </div>
@@ -86,12 +131,12 @@ const VideoAbout = ({videoData, commentData}) => {
 
           <div className="description bg-gray-200 p-2 rounded-xl mt-5">
             <div className='flex'>
-              <p className='mr-3 text-sm font-bold'>{videoData.stats.views} views</p>
+              <p className='mr-3 text-sm font-bold'>{views} views</p>
               <p className='mr-3 text-sm font-bold'>{videoData.publishedDate}</p>
               <p className='mr-1 text-sm'>{videoData.superTitle.items[0]}</p>
             </div>
-            <div className='mt-5 whitespace-pre-wrap'>
-              <pre className=''>{videoData.description}</pre>
+            <div className='mt-5'>
+              <pre className='whitespace-pre-wrap'>{videoData.description}</pre>
             </div>
           </div>
 

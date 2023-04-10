@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 
 const SearchVideoCard = (props) => {
 
-  const {videoId, thumbnail, movingThumbnail, title, publishedAt, channelIcon, channelTitle, description, viewCount} = props;
+  const {videoId, thumbnail, movingThumbnail, duration, title, publishedAt, channelIcon, channelTitle, description, viewCount} = props;
   
   const [views, setViews] = useState();
+
+  const [durationEdit, setDurationEdit] = useState();
 
   const thumbnailRef = useRef();
   
@@ -28,8 +30,23 @@ const SearchVideoCard = (props) => {
     setViews(views);
   }
 
+
+  const handleDuration = () =>{
+    let durationTemp = duration;
+    let date = new Date(null);
+    date.setSeconds(durationTemp);
+    durationTemp = date.toISOString().substring(11, 19);
+    if(durationTemp.startsWith("00:")){
+      durationTemp = durationTemp.replace("00:", " ");
+    }
+
+    setDurationEdit(durationTemp);
+  }
+  
+
   useEffect(()=>{
     handleViews();
+    handleDuration();
   },[])
 
   
@@ -48,8 +65,9 @@ const SearchVideoCard = (props) => {
     <Link to={`/video/${videoId}`}>
     <div className='search-video-card flex mt-5 cursor-pointer' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
 
-        <div className="thumbnail-section">
+        <div className="thumbnail-section relative">
             <img ref={thumbnailRef} className='search-video-card-thumbnail rounded-xl' src={thumbnail} alt="" />
+            <p className='absolute text-sm pl-1 pr-1 right-4 bottom-4 bg-black text-white'>{durationEdit}</p>
         </div>
 
         <div className='search-video-card-content ml-4 p-1'>

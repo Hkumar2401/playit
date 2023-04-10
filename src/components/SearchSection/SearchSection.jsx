@@ -56,6 +56,7 @@ const SearchSection = () => {
                             videoId={item.video.videoId}
                             thumbnail={item.video.thumbnails[item.video.thumbnails.length-1].url}
                             movingThumbnail={item.video.movingThumbnails === null ? null : item.video.movingThumbnails[item.video.movingThumbnails.length-1].url}
+                            duration={item.video.lengthSeconds}
                             title={item.video.title}
                             viewCount={item.video.stats.views}
                             publishedAt={item.video.publishedTimeText}

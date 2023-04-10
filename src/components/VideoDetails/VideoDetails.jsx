@@ -137,7 +137,8 @@ const VideoDetails = () => {
               <RelatedVideosCard
                 key={i}
                 videoId={item.video.videoId}
-                thumbnail={item.video.thumbnails.reverse()[0].url}
+                thumbnail={item.video.thumbnails[item.video.thumbnails.length-1].url}
+                duration={item.video.lengthSeconds}
                 title={item.video.title}
                 channelName={item.video.author.title}
                 viewCount={item.video.stats.views}
