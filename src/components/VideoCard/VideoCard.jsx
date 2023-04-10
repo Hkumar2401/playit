@@ -8,6 +8,8 @@ const VideoCard = (props) => {
   
   const thumbnailRef = useRef();
   
+  const videoCardRef = useRef();
+  
   const [durationEdit, setDurationEdit] = useState('');
   const [views, setViews] = useState(0);
 
@@ -46,10 +48,16 @@ const VideoCard = (props) => {
 
   const mouseOver = () =>{
     thumbnailRef.current.src = movingThumbnail;
+    videoCardRef.current.style.position = 'relative';
+    videoCardRef.current.style.transform = 'scale(1.1,1.1)';
+    videoCardRef.current.style.zIndex = '10';
   }
-
+  
   const mouseOut = () =>{
     thumbnailRef.current.src = thumbnail;
+    videoCardRef.current.style.position = 'relative';
+    videoCardRef.current.style.transform = 'scale(1,1)';
+    videoCardRef.current.style.zIndex = '0';
   }
 
 
@@ -57,10 +65,10 @@ const VideoCard = (props) => {
 
   return (
     <Link to={`/video/${videoId}`}>
-    <div className={`flex flex-col mt-5 ml-2 mr-2  ${fullSidebar ? 'video-card-full-sidebar' : 'video-card-not-full-sidebar'}`} style={{width: videoCardWidth}} onMouseOver={mouseOver} onMouseOut={mouseOut}
+    <div ref={videoCardRef} className={`flex flex-col transition-all ease-linear rounded-lg bg-white mt-5 ml-2 mr-2  ${fullSidebar ? 'video-card-full-sidebar' : 'video-card-not-full-sidebar'}`} style={{width: videoCardWidth}} onMouseOver={mouseOver} onMouseOut={mouseOut}
     >
       <div className="top relative">
-        <img className='thumbnail' style={{width: videoCardThumbnailWidth, height: videoCardThumbnailHeight}} ref={thumbnailRef} src={thumbnail} alt="" />
+        <img className='thumbnail rounded-lg' style={{width: videoCardThumbnailWidth, height: videoCardThumbnailHeight}} ref={thumbnailRef} src={thumbnail} alt="" />
         <p className={`duration text-sm pl-1 pr-1 `}>
         {
           durationEdit
