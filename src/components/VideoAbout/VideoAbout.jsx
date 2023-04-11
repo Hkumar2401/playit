@@ -11,14 +11,14 @@ import CommentCard from '../CommentCard/CommentCard'
 const VideoAbout = ({videoData, commentData}) => {
 
 
-  const [views, setViews] = useState();
+  const [viewsCompute, setViewsCompute] = useState(0);
 
-  const [likes, setLikes] = useState();
+  const [likesCompute, setLikesCompute] = useState(0);
 
   const handleViews = () =>{
     let views = videoData.stats.views;
     if(views<1000){
-
+ 
     } else if(views>=1000 && views<100000){
       views = `${Math.floor((views*10)/1000)/10}k`;
     } else if(views>=100000 && views<1000000){
@@ -28,7 +28,7 @@ const VideoAbout = ({videoData, commentData}) => {
     } else if(views>=1000000000 && views<1000000000000){
       views = `${Math.floor((views*10)/1000000000)/10}B`;
     }
-    setViews(views);
+    setViewsCompute(views);
   }
 
   const handleLikes = () =>{
@@ -44,9 +44,9 @@ const VideoAbout = ({videoData, commentData}) => {
     } else if(likes>=1000000000 && likes<1000000000000){
       likes = `${Math.floor((likes*10)/1000000000)/10}B`;
     }
-    setLikes(likes);
+    setLikesCompute(likes);
   }
-
+ 
   useEffect(()=>{
     handleViews();
     handleLikes();
@@ -82,7 +82,7 @@ const VideoAbout = ({videoData, commentData}) => {
             <div className='cta-buttons flex items-center'>
 
               <div className='cta-button light-gray-color rounded-3xl flex items-center mr-2'>
-                <button className='cta-button-color cursor-pointer rounded-l-3xl px-4 py-2'> <ThumbUpOutlinedIcon /> <span className='px-1'> {likes} </span></button>
+                <button className='cta-button-color cursor-pointer rounded-l-3xl px-4 py-2'> <ThumbUpOutlinedIcon /> <span className='px-1'> {likesCompute} </span></button>
                 <p className='text-gray-600'>|</p>
                 <button className='cta-button-color cursor-pointer rounded-r-3xl px-4 py-2'> <ThumbDownOffAltOutlinedIcon /> </button>
               </div>
@@ -131,7 +131,7 @@ const VideoAbout = ({videoData, commentData}) => {
 
           <div className="description bg-gray-200 p-2 rounded-xl mt-5">
             <div className='flex'>
-              <p className='mr-3 text-sm font-bold'>{views} views</p>
+              <p className='mr-3 text-sm font-bold'>{viewsCompute} views</p>
               <p className='mr-3 text-sm font-bold'>{videoData.publishedDate}</p>
               <p className='mr-1 text-sm'>{videoData.superTitle.items[0]}</p>
             </div>
@@ -150,7 +150,7 @@ const VideoAbout = ({videoData, commentData}) => {
                   return (
                     <CommentCard
                       key={i}
-                      avatar={item.author.avatar.reverse()[0].url}
+                      avatar={item.author.avatar[item.author.avatar.length - 1].url}
                       title={item.author.title}
                       publishedAt={item.publishedTimeText}
                       content={item.content}

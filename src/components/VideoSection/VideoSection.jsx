@@ -61,6 +61,7 @@ const Videosection = ({fullSidebar}) => {
         return (
           loading ? 
             <SkeletonVideoCard 
+              key={i}
               fullSidebar={fullSidebar}
             />
             :

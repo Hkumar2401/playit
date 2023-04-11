@@ -68,7 +68,7 @@ const SearchSection = () => {
                         item.type === "channel" ?
                         <SearchChannelCard 
                             key={i}
-                            channelId={item.channel.channelId}
+                            channelId={item.channel.channelId !== null && item.channel.channelId}
                             channelIcon={item.channel.avatar[item.channel.avatar.length-1].url}
                             channelTitle={item.channel.title}
                             channelUsername={item.channel.username}

@@ -63,7 +63,7 @@ const Navbar = (props) => {
             type="text" 
           />
           
-        <Link to={`/search/${search.replaceAll(" ", "")}`}>
+        <Link to={`/search/${search.replaceAll(" ", "+")}`}>
           <button className='search-icon relative' onMouseOver={()=> hoverTitleSearch.current.style.display = 'block'} onMouseOut={()=> hoverTitleSearch.current.style.display = 'none'}>
             <SearchRoundedIcon fontSize='large' className='p-1' />
             <p className='hover-titles hover-title-search' ref={hoverTitleSearch}>Search</p>

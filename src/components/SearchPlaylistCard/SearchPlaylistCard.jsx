@@ -1,6 +1,5 @@
 import React from 'react'
 import './searchplaylistcard.css'
-import { Link, useParams } from 'react-router-dom';
 
 const SearchPlaylistCard = (props) => {
 
@@ -8,7 +7,6 @@ const SearchPlaylistCard = (props) => {
   
   
   return (
-    <Link to={`/playlist/${playlistId}`}>
       <div className='playlist-card flex mt-5 cursor-pointer'>
 
           <div className="playlist-thumbnail-section">
@@ -22,7 +20,6 @@ const SearchPlaylistCard = (props) => {
           </div>
 
       </div>
-    </Link>
   )
 }
 

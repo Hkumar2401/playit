@@ -7,7 +7,6 @@ import VideoDetails from './components/VideoDetails/VideoDetails'
 import VideoSection from './components/VideoSection/VideoSection'
 import SearchSection from './components/SearchSection/SearchSection'
 import ChannelSectionCard from './components/ChannelSection/ChannelSectionCard'
-import PlaylistDetails from './components/PlaylistDetails/PlaylistDetails'
 
 const App = () => {
 
@@ -75,12 +74,6 @@ const App = () => {
                 />
             </div>
           } />
-
-          <Route path='/playlist/:playlistId' element={
-            <PlaylistDetails />
-          }/>
-
-          
 
 
         </Routes>
