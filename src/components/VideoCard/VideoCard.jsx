@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const VideoCard = (props) => {
 
-  const {fullSidebar, videoId, videoCardWidth, videoCardThumbnailWidth, videoCardThumbnailHeight, durationPositionRight, thumbnail, movingThumbnail,  channelIcon, videoTitle, channelTitle, publishedAt, duration, viewCount} = props;
+  const {fullSidebar, videoId, changeOnSidebarToggle,thumbnail, movingThumbnail,  channelIcon, videoTitle, channelTitle, publishedAt, duration, viewCount} = props;
   
   const thumbnailRef = useRef();
   
@@ -60,16 +60,40 @@ const VideoCard = (props) => {
     videoCardRef.current.style.zIndex = '0';
   }
 
+  const handleCardStyle = () =>{
+    if(changeOnSidebarToggle){
+      if(fullSidebar === true){
+        videoCardRef.current.style.width = '360px';
+        videoCardRef.current.style.height = '350px';
+        thumbnailRef.current.style.width = '100%';
+      }
+      else{
+        videoCardRef.current.style.width = '340px'
+        thumbnailRef.current.style.width = '100%';
+      }
+    }
+    
+    else{
+      videoCardRef.current.style.width = '300px';
+      videoCardRef.current.style.height = '320px';
+      thumbnailRef.current.style.width = '300px';
+      thumbnailRef.current.style.height = '170px';
 
+    }
+  }
+
+  useEffect(()=>{
+    handleCardStyle();
+  },[fullSidebar])
   
 
   return (
     <Link to={`/video/${videoId}`}>
-    <div ref={videoCardRef} className={`flex flex-col transition-all ease-linear rounded-lg bg-white mt-5 ml-2 mr-2  ${fullSidebar ? 'video-card-full-sidebar' : 'video-card-not-full-sidebar'}`} style={{width: videoCardWidth}} onMouseOver={mouseOver} onMouseOut={mouseOut}
+    <div ref={videoCardRef} className={`flex flex-col transition-all ease-linear rounded-lg bg-white mt-5 ml-2 mr-2`} onMouseOver={mouseOver} onMouseOut={mouseOut}
     >
       <div className="top relative">
-        <img className='thumbnail rounded-lg' style={{width: videoCardThumbnailWidth, height: videoCardThumbnailHeight}} ref={thumbnailRef} src={thumbnail} alt="" />
-        <p className={`duration text-sm pl-1 pr-1 `}>
+        <img className='thumbnail rounded-lg' ref={thumbnailRef} src={thumbnail} alt="" />
+        <p className={`absolute text-sm pl-1 pr-1 right-4 bottom-4 bg-black text-white`}>
         {
           durationEdit
         }

@@ -42,11 +42,11 @@ const Videosection = ({fullSidebar}) => {
         // console.log(data.contents);
         
         setPopularVideosData(data.contents.filter((item)=> item.type==='video'));
+        setLoading(false);
         
       }catch(error){
         console.log(error);
       }
-      setLoading(false);
           
     }  
 
@@ -77,9 +77,7 @@ const Videosection = ({fullSidebar}) => {
             duration={item.video.lengthSeconds}
             publishedAt={item.video.publishedTimeText}
             fullSidebar={fullSidebar}
-            videoCardWidth={'360px'}
-            videoCardThumbnailWidth={`360px`}
-            videoCardThumbnailHeight={'202px'}
+            changeOnSidebarToggle={true}
           />
 
         

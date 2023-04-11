@@ -86,9 +86,7 @@ const ChannelSectionCard = ({ fullSidebar }) => {
                                 duration={item.video.lengthSeconds}
                                 publishedAt={item.video.publishedTimeText}
                                 fullSidebar={fullSidebar}
-                                videoCardWidth={'300px'}
-                                videoCardThumbnailWidth={'300px'}
-                                videoCardThumbnailHeight={'170px'}
+                                changeOnSidebarToggle={false}
                             />
                         );
                     })
