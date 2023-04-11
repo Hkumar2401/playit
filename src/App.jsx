@@ -49,6 +49,7 @@ const App = () => {
                 />
                 <SearchSection 
                   search={search}
+                  fullSidebar={fullSidebar}
                 />
             </div>
           } />

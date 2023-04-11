@@ -15,6 +15,9 @@ const VideoAbout = ({videoData, commentData}) => {
 
   const [likesCompute, setLikesCompute] = useState(0);
 
+  useEffect(()=>{
+
+    
   const handleViews = () =>{
     let views = videoData.stats.views;
     if(views<1000){
@@ -46,11 +49,10 @@ const VideoAbout = ({videoData, commentData}) => {
     }
     setLikesCompute(likes);
   }
- 
-  useEffect(()=>{
+    
     handleViews();
     handleLikes();
-  },[])
+  },[videoData]);
   
   
   

@@ -24,10 +24,10 @@ import { Link } from 'react-router-dom';
 const Sidebar = ({fullSidebar}) => {
 
   return (
-    <div>
+    <div className=''>
 
     {fullSidebar ?
-      <div className='sidebar pl-2'>
+      <div className={`sidebar pl-2`}>
 
         <Link to={`/category/ohara`}>
         <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Home'>
@@ -37,7 +37,7 @@ const Sidebar = ({fullSidebar}) => {
         </Link>
 
 
-      <Link to={`/category/clever programmer`}>
+      <Link to={`/category/clever+programmer`}>
         <div className='flex items-center p-2 pl-4 pr-12 sidebar-buttons' title='Subscriptions'>
           <button><SubscriptionsOutlinedIcon /></button>
           <p className='pl-6 pt-1'>Clever Programmer</p>

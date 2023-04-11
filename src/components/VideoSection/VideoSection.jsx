@@ -3,11 +3,17 @@ import VideoCard from '../VideoCard/VideoCard';
 import { useState, useEffect } from 'react';
 import SkeletonVideoCard from '../SkeletonVideoCard/SkeletonVideoCard';
 import { useParams } from 'react-router-dom';
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Oval } from 'react-loader-spinner';
 
 const Videosection = ({fullSidebar}) => {
 
 
-  const [popularVideosData, setPopularVideosData] = useState([]);
+  const [videosData, setVideosData] = useState([]);
+
+  const [cursorNext, setCursorNext] = useState();
+
+
 
   let {sidebarQuery} = useParams();
   
@@ -17,6 +23,8 @@ const Videosection = ({fullSidebar}) => {
 
 
   const [loading, setLoading] = useState(false);
+
+  const [spinnerLoading, setSpinnerLoading] = useState(false);
 
   const BASE_URL = 'https://youtube138.p.rapidapi.com';
 
@@ -39,9 +47,10 @@ const Videosection = ({fullSidebar}) => {
         setLoading(true);
         const response = await fetch(`${BASE_URL}/search/?q=${sidebarQuery}&hl=en&gl=US`, options);
         const data = await response.json();
-        // console.log(data.contents);
+        // console.log(data);
         
-        setPopularVideosData(data.contents.filter((item)=> item.type==='video'));
+        setVideosData(data.contents.filter((item)=> item.type==='video'));
+        setCursorNext(data.cursorNext);
         setLoading(false);
         
       }catch(error){
@@ -53,40 +62,78 @@ const Videosection = ({fullSidebar}) => {
     fetchFromApi();
   }, [sidebarQuery]);
 
+    const fetchNext = async ()=>{
+      setSpinnerLoading(true);
+      const response = await fetch(`${BASE_URL}/search/?q=${sidebarQuery}&cursor=${cursorNext}&hl=en&gl=US`, options);
+      const data = await response.json();
+      setVideosData([...videosData, ...data.contents.filter((item)=> item.type === 'video')]);
+      // console.log(videosData);
+      setSpinnerLoading(false);
+    }
+
+
+
   
   return (
-    <div className={`video-section p-4 flex flex-wrap items-center ${fullSidebar ? 'pl-24' : 'pl-5'}`}>
-    {
-      popularVideosData.map((item, i)=>{
-        return (
-          loading ? 
-            <SkeletonVideoCard 
-              key={i}
-              fullSidebar={fullSidebar}
-            />
-            :
-          <VideoCard
-            key={i} 
-            channelId={item.video.author.channelId}
-            channelIcon={item.video.author.avatar[item.video.author.avatar.length-1].url}
-            videoId={item.video.videoId}
-            channelTitle={item.video.author.title}
-            videoTitle={item.video.title}
-            viewCount={item.video.stats.views}
-            thumbnail={item.video.thumbnails[item.video.thumbnails.length-1].url} 
-            movingThumbnail={item.video.movingThumbnails === null ? null : item.video.movingThumbnails[item.video.movingThumbnails.length-1].url}
-            duration={item.video.lengthSeconds}
-            publishedAt={item.video.publishedTimeText}
-            fullSidebar={fullSidebar}
-            changeOnSidebarToggle={true}
-          />
-
-        
-
-        );
-      })
+    <InfiniteScroll 
+    dataLength={videosData.length}
+    next={fetchNext}
+    hasMore={true}
+    loader={
+      spinnerLoading &&
+      <div className='loader'>
+        <Oval
+          height={50}
+          width={50}
+          color="gray"
+          visible={true}
+          ariaLabel='oval-loading'
+          secondaryColor="rgb(174, 171, 171)"
+          strokeWidth={4}
+          strokeWidthSecondary={4}
+        />
+      </div>
     }
-    </div>
+    endMessage={
+        <p style={{textAlign: 'center'}}>
+          <b>No more videos to show</b>
+        </p>
+        }
+    >
+
+      <div className={`video-section p-4 flex w-full flex-wrap items-center ${fullSidebar ? 'pl-24' : 'pl-5'}`}>
+      {
+        videosData.map((item, i)=>{
+          return (
+            loading ? 
+              <SkeletonVideoCard 
+                key={i}
+                fullSidebar={fullSidebar}
+              />
+              :
+            <VideoCard
+              key={i} 
+              channelId={item.video.author.channelId}
+              channelIcon={item.video.author.avatar[item.video.author.avatar.length-1].url}
+              videoId={item.video.videoId}
+              channelTitle={item.video.author.title}
+              videoTitle={item.video.title}
+              viewCount={item.video.stats.views}
+              thumbnail={item.video.thumbnails[item.video.thumbnails.length-1].url} 
+              movingThumbnail={item.video.movingThumbnails === null ? null : item.video.movingThumbnails[item.video.movingThumbnails.length-1].url}
+              duration={item.video.lengthSeconds}
+              publishedAt={item.video.publishedTimeText}
+              fullSidebar={fullSidebar}
+              changeOnSidebarToggle={true}
+            />
+
+          
+
+          );
+        })
+      }
+      </div>
+    </InfiniteScroll>
   )
 }
 
