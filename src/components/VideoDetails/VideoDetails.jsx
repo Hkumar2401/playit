@@ -8,7 +8,7 @@ import VideoAbout from '../VideoAbout/VideoAbout'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Oval } from 'react-loader-spinner'
 
-const VideoDetails = () => {
+const VideoDetails = ({fullSidebar, collapseSidebar}) => {
 
   const { id } = useParams();
 
@@ -152,7 +152,7 @@ const VideoDetails = () => {
   return (
 
 
-    <div className='video-details flex mt-10 mx-auto ml-20'>
+    <div className={`video-details flex mt-10 mx-auto ml-20 ${fullSidebar && 'blur-shade'}`}>
 
       <div className='video-player-section mr-8'>
         <div className='video-player'>

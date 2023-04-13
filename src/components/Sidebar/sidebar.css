@@ -3,6 +3,7 @@
     width: 260px;
     position: sticky;
     top: 60px;
+    height: 100vh;
 }
 
 .sidebar-not-full{

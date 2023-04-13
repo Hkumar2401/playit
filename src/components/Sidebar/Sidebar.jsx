@@ -21,10 +21,10 @@ import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
 import { Link } from 'react-router-dom';
 
 
-const Sidebar = ({fullSidebar}) => {
+const Sidebar = ({fullSidebar, collapseSidebar}) => {
 
   return (
-    <div className=''>
+    <div className={`bg-white ${collapseSidebar && 'absolute top-16 z-30'} `}>
 
     {fullSidebar ?
       <div className={`sidebar pl-2`}>
@@ -155,7 +155,7 @@ const Sidebar = ({fullSidebar}) => {
 
     </div>
     :
-    <div className='sidebar-not-full'>
+    <div className={`sidebar-not-full ${collapseSidebar && 'invisible'}`}>
 
       <div className='flex items-center flex-col p-0 pt-6 pb-6 sidebar-not-full-buttons' title='Home'>
           <button><HomeOutlinedIcon /></button>

@@ -14,3 +14,10 @@
     background-color: rgb(215, 215, 215);
 }
 
+.blur-shade{
+    /* filter: brightness(0.4);
+    background-color: rgb(181, 179, 179); */
+    filter: blur(5px);
+    pointer-events: none;
+}
+

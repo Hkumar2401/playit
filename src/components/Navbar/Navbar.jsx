@@ -33,7 +33,7 @@ const Navbar = (props) => {
   
   
   return (
-    <div className="navbar flex justify-between items-center pl-2 pr-2">
+    <div className="navbar flex justify-between items-center pl-2 pr-2 fixed">
         <div className="logo-section flex items-center">
           <div className="hamburger-icon-section">
             <button ref={hamburgerButton} onClick={handleClick} className='hamburger-icon'>

@@ -40,7 +40,19 @@ const App = () => {
           } 
           />
 
-          <Route path='/video/:id' element={<VideoDetails />} />
+          <Route path='/video/:id' element={
+            <div className=''>
+              <Sidebar 
+                fullSidebar={fullSidebar}
+                collapseSidebar={true}
+              />
+              <VideoDetails 
+              fullSidebar={fullSidebar}
+                collapseSidebar={true}
+                setFullSidebar={setFullSidebar}
+              />
+            </div>
+          } />
 
           <Route path='/search/:query' element={
             <div className='flex'>
