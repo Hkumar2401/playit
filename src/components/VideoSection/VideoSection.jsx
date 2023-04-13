@@ -68,6 +68,7 @@ const Videosection = ({fullSidebar}) => {
       const data = await response.json();
       setVideosData([...videosData, ...data.contents.filter((item)=> item.type === 'video')]);
       // console.log(videosData);
+      setCursorNext(data.cursorNext);
       setSpinnerLoading(false);
     }
 

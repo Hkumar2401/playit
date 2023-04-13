@@ -125,6 +125,7 @@ const VideoDetails = () => {
       const data = await response.json();
       // console.log(data.comments);
       setCommentData([...commentData, ...data.comments]);
+      setCommentCursorNext(data.cursorNext);
       setCommentSpinnerLoading(false);
     } catch (error) {
       console.log(error);
@@ -138,6 +139,7 @@ const VideoDetails = () => {
       const response = await fetch(`${BASE_URL}/video/related-contents/?id=${id}&cursor=${relatedCursorNext}&hl=en&gl=US`, options);
       const data = await response.json();
       setRelatedVideoData([...relatedVideoData, ...data.contents]);
+      setrelatedCursonNext(data.cursorNext);
       setRelatedSpinnerLoading(false);
     } catch (error) {
       console.log(error);

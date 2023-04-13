@@ -54,6 +54,7 @@ const ChannelSectionCard = ({ fullSidebar }) => {
         const response = await fetch(`${BASE_URL}/channel/videos/?q=${channelId}&cursor=${cursorNext}&hl=en&gl=US`, options);
         const data = await response.json();
         setChannelVideos([...channelVideos, ...data.contents]);
+        setCursorNext(data.cursorNext);
         // console.log(videosData);
         setSpinnerLoading(false);
       }
