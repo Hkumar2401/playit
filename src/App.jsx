@@ -41,13 +41,13 @@ const App = () => {
           />
 
           <Route path='/video/:id' element={
-            <div className=''>
+            <div className='flex transition-sidebar'>
               <Sidebar 
                 fullSidebar={fullSidebar}
                 collapseSidebar={true}
               />
               <VideoDetails 
-              fullSidebar={fullSidebar}
+                fullSidebar={fullSidebar}
                 collapseSidebar={true}
                 setFullSidebar={setFullSidebar}
               />

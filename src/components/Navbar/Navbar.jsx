@@ -7,6 +7,7 @@ import MicIcon from '@mui/icons-material/Mic';
 import YoutubeIcon from '../../assets/youtube-icon.png'
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import SearchBar from '../SearchBar/SearchBar';
 
 
 const Navbar = (props) => {
@@ -53,17 +54,15 @@ const Navbar = (props) => {
 
         <div className="search-section pt-2 flex items-center">
           <button className='search-icon-focus'  ref={searchIconOnFocus}><SearchRoundedIcon fontSize='large' className='p-1' /></button>
-          <input 
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className='search-input' 
-            onFocus={()=> searchIconOnFocus.current.style.display = 'block'} 
-            onBlur={()=> searchIconOnFocus.current.style.display = 'none'} 
-            placeholder='Search' 
-            type="text" 
-          />
+          <div>
+            <SearchBar 
+              search={search}
+              setSearch={setSearch}
+              searchIconOnFocus={searchIconOnFocus}
+            />
+          </div>
           
-        <Link to={`/search/${search.replaceAll(" ", "%20")}`}>
+        <Link to={`/search/${search !== undefined && search.replaceAll(" ", "%20")}`}>
           <button className='search-icon relative' onMouseOver={()=> hoverTitleSearch.current.style.display = 'block'} onMouseOut={()=> hoverTitleSearch.current.style.display = 'none'}>
             <SearchRoundedIcon fontSize='large' className='p-1' />
             <p className='hover-titles hover-title-search' ref={hoverTitleSearch}>Search</p>

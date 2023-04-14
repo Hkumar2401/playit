@@ -24,7 +24,7 @@ import { Link } from 'react-router-dom';
 const Sidebar = ({fullSidebar, collapseSidebar}) => {
 
   return (
-    <div className={`bg-white ${collapseSidebar && 'absolute top-16 z-30'} `}>
+    <div className={`bg-white sidebar-parent ${!collapseSidebar ? '' : fullSidebar ? 'fixed z-30 left-0 top-12' : 'w-0 collapse'}`}>
 
     {fullSidebar ?
       <div className={`sidebar pl-2`}>
@@ -155,7 +155,7 @@ const Sidebar = ({fullSidebar, collapseSidebar}) => {
 
     </div>
     :
-    <div className={`sidebar-not-full ${collapseSidebar && 'invisible'}`}>
+    <div className={`sidebar-not-full`}>
 
       <div className='flex items-center flex-col p-0 pt-6 pb-6 sidebar-not-full-buttons' title='Home'>
           <button><HomeOutlinedIcon /></button>

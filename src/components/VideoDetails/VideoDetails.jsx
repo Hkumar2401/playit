@@ -8,7 +8,7 @@ import VideoAbout from '../VideoAbout/VideoAbout'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Oval } from 'react-loader-spinner'
 
-const VideoDetails = ({fullSidebar, collapseSidebar}) => {
+const VideoDetails = ({fullSidebar, collapseSidebar, setFullSidebar}) => {
 
   const { id } = useParams();
 
@@ -63,6 +63,10 @@ const VideoDetails = ({fullSidebar, collapseSidebar}) => {
 
 
   useEffect(() => {
+
+    if(collapseSidebar === true){
+      setFullSidebar(false);
+    }
 
     // to fetch related videos data
     const fetchRelatedVideos = async () => {

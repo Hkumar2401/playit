@@ -1,0 +1,9 @@
+.suggestion-box{
+    width: 26.5%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.color:hover{
+    background-color: rgb(228, 228, 228);
+    cursor:default;
+}
