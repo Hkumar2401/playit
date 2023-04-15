@@ -7,13 +7,13 @@ import PlaylistVideoCard from '../PlaylistVideoCard/PlaylistVideoCard';
 
 const PlaylistSection = ({ fullSidebar, setFullSidebar }) => {
 
-    setFullSidebar(false);
-    
     const { playlistId } = useParams();
 
     const [playlistVideos, setPlaylistVideos] = useState([]);
 
     const [currentVideo, setCurrentVideo] = useState();
+
+    const [viewsCompute, setViewsCompute] = useState(0);
 
     const [playlistDetails, setPlaylistDetails] = useState({
         title: '',
@@ -46,7 +46,7 @@ const PlaylistSection = ({ fullSidebar, setFullSidebar }) => {
             try {
                 const res = await fetch(`${BASE_URL}/playlist/videos/?id=${playlistId}&hl=en&gl=US`, options);
                 const data = await res.json();
-                console.log(data.contents);
+                // console.log(data.contents);
                 setPlaylistVideos(data.contents);
                 setCurrentVideo(data.contents[0].video.videoId);
             } catch (err) {
@@ -67,7 +67,31 @@ const PlaylistSection = ({ fullSidebar, setFullSidebar }) => {
 
         fetchPlaylistDetails();
         fetchPlaylistVideos();
+        setFullSidebar(false);
     }, [playlistId])
+
+    useEffect(() => {
+
+        const handleViews = () => {
+            let views = playlistDetails.stats.views;
+            if (views < 1000) {
+
+            } else if (views >= 1000 && views < 100000) {
+                views = `${Math.floor((views * 10) / 1000) / 10}k`;
+            } else if (views >= 100000 && views < 1000000) {
+                views = `${Math.floor((views * 10) / 1000) / 10}k`;
+            } else if (views >= 1000000 && views < 1000000000) {
+                views = `${Math.floor((views * 10) / 1000000) / 10}M`;
+            } else if (views >= 1000000000 && views < 1000000000000) {
+                views = `${Math.floor((views * 10) / 1000000000) / 10}B`;
+            }
+            setViewsCompute(views);
+        }
+
+        handleViews();
+    }, [playlistDetails]);
+
+
 
     const opts = {
         height: '750',
@@ -78,7 +102,7 @@ const PlaylistSection = ({ fullSidebar, setFullSidebar }) => {
     return (
         <div className={`playlist-section mt-10 ml-20 flex  ${fullSidebar && 'blur-shade'}`}>
 
-            <div className='video-player-section flex flex-col'>
+            <div className='video-player-section flex flex-col sticky -top-36 h-fit '>
 
                 <div className='video-player mr-8'>
                     <Youtube
@@ -112,7 +136,7 @@ const PlaylistSection = ({ fullSidebar, setFullSidebar }) => {
 
                     <div className="description bg-gray-200 p-2 rounded-xl mt-5">
                         <div className='flex'>
-                            <p className='mr-3 text-sm font-bold'>{playlistDetails.stats.views} views</p>
+                            <p className='mr-3 text-sm font-bold'>{viewsCompute} views</p>
                             <p className='mr-3 text-sm font-bold'>{playlistDetails.updatedTimeText}</p>
                         </div>
                         <div className='mt-5'>
@@ -120,10 +144,10 @@ const PlaylistSection = ({ fullSidebar, setFullSidebar }) => {
                         </div>
                     </div>
 
-                    <div className="comment-section mt-5">
+                    {/* <div className="comment-section mt-5">
                         <p>{`00`} Comments</p>
 
-                        {/* <div className='comments'>
+                        <div className='comments'>
 
                             {
                                 commentData.map((item, i) => {
@@ -140,9 +164,9 @@ const PlaylistSection = ({ fullSidebar, setFullSidebar }) => {
                                 })
                             }
 
-                        </div> */}
+                        </div>
 
-                    </div>
+                    </div> */}
 
 
                 </div>
