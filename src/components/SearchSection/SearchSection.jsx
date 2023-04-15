@@ -34,7 +34,6 @@ const SearchSection = ({fullSidebar}) => {
 
         const fetchSearchData = async () => {
             try {
-
                 const res = await fetch(`${BASE_URL}/search/?q=${query}&hl=en&gl=US`, options);
                 const data = await res.json();
                 setSearchData(data.contents);
@@ -55,6 +54,7 @@ const SearchSection = ({fullSidebar}) => {
         const response = await fetch(`${BASE_URL}/search/?q=${query}&cursor=${cursorNext}&hl=en&gl=US`, options);
         const data = await response.json();
         setSearchData([...searchData, ...data.contents]);
+        setCursorNext(data.cursorNext);
         setSpinnerLoading(false);
     }
 

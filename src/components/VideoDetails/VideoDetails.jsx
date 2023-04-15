@@ -116,12 +116,7 @@ const VideoDetails = ({fullSidebar, collapseSidebar, setFullSidebar}) => {
     fetchVideoDetails();
     fetchRelatedVideos();
   }, [id])
-
-  const opts = {
-    height: '750',
-    width: '1250',
-  };
-
+  
   const fetchMoreComments = async () => {
     try {
       setCommentSpinnerLoading(true);
@@ -135,8 +130,8 @@ const VideoDetails = ({fullSidebar, collapseSidebar, setFullSidebar}) => {
       console.log(error);
     }
   }
-
-
+  
+  
   const fetchMoreRelatedVideos = async () =>{
     try {
       setRelatedSpinnerLoading(true);
@@ -149,9 +144,12 @@ const VideoDetails = ({fullSidebar, collapseSidebar, setFullSidebar}) => {
       console.log(error);
     }
   }
-
-
-
+  
+    const opts = {
+      height: '750',
+      width: '1250',
+    };
+  
 
   return (
 

@@ -12,7 +12,7 @@ import SearchBar from '../SearchBar/SearchBar';
 
 const Navbar = (props) => {
 
-  const {fullSidebar, setFullSidebar, search, setSearch} = props;
+  const { fullSidebar, setFullSidebar, search, setSearch } = props;
 
   const hamburgerButton = useRef();
   const searchIconOnFocus = useRef();
@@ -21,74 +21,77 @@ const Navbar = (props) => {
   const hoverTitleCreate = useRef();
   const hoverTitleNotifications = useRef();
 
-  
-  const handleClick = () =>{
-    if(fullSidebar==true){
+  const [selectedOption, setSelectedOption] = useState(false);
+
+  const handleClick = () => {
+    if (fullSidebar == true) {
       setFullSidebar(false);
-    } else{
+    } else {
       setFullSidebar(true);
     }
   }
 
-  
-  
-  
+
+
+
   return (
     <div className="navbar flex justify-between items-center pl-2 pr-2 fixed">
-        <div className="logo-section flex items-center">
-          <div className="hamburger-icon-section">
-            <button ref={hamburgerButton} onClick={handleClick} className='hamburger-icon'>
-                <div className="hamburger-icon-lines"></div>
-                <div className="hamburger-icon-lines"></div>
-                <div className="hamburger-icon-lines"></div>
-            </button>
-          </div>
-
-          <Link to={'/category/ohara'}>
-          <div title='Youtube Home' className="youtube-icon ml-5 mt-1 flex items-center cursor-pointer">
-              <img className='w-8' src={YoutubeIcon} alt="" />
-              <p className='font-semibold text-2xl ml-1'>Youtube <sup className='font-light text-xs text-gray-500'>IN</sup> </p>
-          </div>
-          </Link>
+      <div className="logo-section flex items-center">
+        <div className="hamburger-icon-section">
+          <button ref={hamburgerButton} onClick={handleClick} className='hamburger-icon'>
+            <div className="hamburger-icon-lines"></div>
+            <div className="hamburger-icon-lines"></div>
+            <div className="hamburger-icon-lines"></div>
+          </button>
         </div>
 
-        <div className="search-section pt-2 flex items-center">
-          <button className='search-icon-focus'  ref={searchIconOnFocus}><SearchRoundedIcon fontSize='large' className='p-1' /></button>
-          <div>
-            <SearchBar 
-              search={search}
-              setSearch={setSearch}
-              searchIconOnFocus={searchIconOnFocus}
-            />
+        <Link to={'/category/ohara'}>
+          <div title='Youtube Home' className="youtube-icon ml-5 mt-1 flex items-center cursor-pointer">
+            <img className='w-8' src={YoutubeIcon} alt="" />
+            <p className='font-semibold text-2xl ml-1'>Youtube <sup className='font-light text-xs text-gray-500'>IN</sup> </p>
           </div>
-          
-        <Link to={`/search/${search !== undefined && search.replaceAll(" ", "%20")}`}>
-          <button className='search-icon relative' onMouseOver={()=> hoverTitleSearch.current.style.display = 'block'} onMouseOut={()=> hoverTitleSearch.current.style.display = 'none'}>
+        </Link>
+      </div>
+
+      <div className="search-section pt-2 flex items-center">
+        <button className='search-icon-focus' ref={searchIconOnFocus}><SearchRoundedIcon fontSize='large' className='p-1' /></button>
+        <div>
+          <SearchBar
+            search={search}
+            setSearch={setSearch}
+            searchIconOnFocus={searchIconOnFocus}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+          />
+        </div>
+
+        <Link to={`/search/${search !== undefined && search.replaceAll(" ", "%20")}`} onClick={()=>setSelectedOption(true)}>
+          <button className='search-icon relative' onMouseOver={() => hoverTitleSearch.current.style.display = 'block'} onMouseOut={() => hoverTitleSearch.current.style.display = 'none'}>
             <SearchRoundedIcon fontSize='large' className='p-1' />
             <p className='hover-titles hover-title-search' ref={hoverTitleSearch}>Search</p>
           </button>
-          </Link>
+        </Link>
 
-          <button className='search-mic-icon ml-4 relative' onMouseOver={()=> hoverTitleMic.current.style.display = 'block'} onMouseOut={()=> hoverTitleMic.current.style.display = 'none'}>
-            <MicIcon />
-            <p className="hover-titles hover-title-mic" ref={hoverTitleMic}>Search with your voice</p>
-          </button>
-          
-        </div>
+        <button className='search-mic-icon ml-4 relative' onMouseOver={() => hoverTitleMic.current.style.display = 'block'} onMouseOut={() => hoverTitleMic.current.style.display = 'none'}>
+          <MicIcon />
+          <p className="hover-titles hover-title-mic" ref={hoverTitleMic}>Search with your voice</p>
+        </button>
 
-        <div className="profile-section w-44 p-2 flex justify-between items-center mr-14">
-          <button className='profile-section-icons relative' onMouseOver={()=> hoverTitleCreate.current.style.display = 'block'} onMouseOut={()=> hoverTitleCreate.current.style.display = 'none'}>
-            <VideoCallOutlinedIcon fontSize='large' className='p-1'  />
-            <p className="hover-titles hover-title-create" ref={hoverTitleCreate}>Create</p>
-          </button>
+      </div>
 
-          <button className='profile-section-icons relative' onMouseOver={()=> hoverTitleNotifications.current.style.display = 'block'} onMouseOut={()=> hoverTitleNotifications.current.style.display = 'none'}>
-            <NotificationsNoneOutlinedIcon fontSize='large' className='p-1' />
-            <p className="hover-titles hover-title-notifications" ref={hoverTitleNotifications}>Notifications</p>
-          </button>
+      <div className="profile-section w-44 p-2 flex justify-between items-center mr-14">
+        <button className='profile-section-icons relative' onMouseOver={() => hoverTitleCreate.current.style.display = 'block'} onMouseOut={() => hoverTitleCreate.current.style.display = 'none'}>
+          <VideoCallOutlinedIcon fontSize='large' className='p-1' />
+          <p className="hover-titles hover-title-create" ref={hoverTitleCreate}>Create</p>
+        </button>
 
-          <button className='profile-section-icons'><AccountCircleOutlinedIcon fontSize='large' className='p-1' /></button>
-        </div>
+        <button className='profile-section-icons relative' onMouseOver={() => hoverTitleNotifications.current.style.display = 'block'} onMouseOut={() => hoverTitleNotifications.current.style.display = 'none'}>
+          <NotificationsNoneOutlinedIcon fontSize='large' className='p-1' />
+          <p className="hover-titles hover-title-notifications" ref={hoverTitleNotifications}>Notifications</p>
+        </button>
+
+        <button className='profile-section-icons'><AccountCircleOutlinedIcon fontSize='large' className='p-1' /></button>
+      </div>
     </div>
   )
 }

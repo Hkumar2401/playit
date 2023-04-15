@@ -4,17 +4,14 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import { Link } from 'react-router-dom';
 
 
-const SearchBar = ({ search, setSearch, searchIconOnFocus }) => {
+const SearchBar = ({ search, setSearch, searchIconOnFocus, selectedOption, setSelectedOption }) => {
 
     const BASE_URL = 'https://youtube138.p.rapidapi.com';
 
     const [autocompleteSuggestions, setAutocompleteSuggestions] = useState([]);
 
-    const [selectedOption, setSelectedOption] = useState(false);
 
     const SuggestionBoxRef = useRef();
-
-
 
 
     useEffect(() => {
@@ -75,6 +72,7 @@ const SearchBar = ({ search, setSearch, searchIconOnFocus }) => {
                 !selectedOption &&
                 <div ref={SuggestionBoxRef} className='suggestion-box pt-5 mt-1 pb-5 absolute bg-white rounded-lg'>
                     {
+                        autocompleteSuggestions !== undefined &&
                         autocompleteSuggestions.map((item, i) => {
                             return (
                                 <Link key={i} to={`search/${item}`} onClick={() => handleClick(item)}>

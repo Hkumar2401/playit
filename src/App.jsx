@@ -7,6 +7,7 @@ import VideoDetails from './components/VideoDetails/VideoDetails'
 import VideoSection from './components/VideoSection/VideoSection'
 import SearchSection from './components/SearchSection/SearchSection'
 import ChannelSectionCard from './components/ChannelSection/ChannelSectionCard'
+import PlaylistSection from './components/PlaylistSection/PlaylistSection'
 
 const App = () => {
 
@@ -84,6 +85,20 @@ const App = () => {
                 />
                 <ChannelSectionCard
                   fullSidebar={fullSidebar}
+                />
+            </div>
+          } />
+
+
+          <Route path='/playlist/:playlistId' element={
+            <div className='flex'>
+                <Sidebar 
+                  fullSidebar={fullSidebar}
+                  collapseSidebar={true}
+                />
+                <PlaylistSection
+                  fullSidebar={fullSidebar}
+                  setFullSidebar={setFullSidebar}
                 />
             </div>
           } />
